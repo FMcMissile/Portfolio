@@ -29,7 +29,7 @@ export default function Home() {
           src="/images/fsae-bg.jpg"
           alt=""
           aria-hidden
-          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover object-right pointer-events-none"
           style={{ opacity: 0.92, transform: "scaleX(-1)" }}
         />
         {/* dark gradient overlay so text stays readable */}
@@ -218,7 +218,7 @@ export default function Home() {
             {/* Col 2: description */}
             <div className="p-8 border-r border-black/8 max-[900px]:border-r-0 max-[900px]:border-b">
               <p className="text-[0.87rem] text-muted leading-[1.8]">
-                Identified a real problem in a school IT department and delivered a full engineering design cycle — from user interviews through 4+ prototype iterations to a validated, client-approved product.
+                Identified a real problem in a school IT department and delivered a full engineering design cycle — from user interviews through 4+ prototype iterations to a finished, tested product.
               </p>
             </div>
             {/* Col 3: bullets */}
@@ -251,7 +251,7 @@ export default function Home() {
             <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">Avionics / Systems</div>
             <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">RC Fixed-Wing Aircraft Build — Eclipson G1 Wolf</h3>
             <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
-              End-to-end build of a 3D-printed fixed-wing RC aircraft. Printed all structural components on a Bambu X1 Carbon, integrated a full avionics stack (brushless motor, ESC, servos, FlySky receiver, LiPo), and ran full systems checks prior to flight. Performed FEA on structural brackets and sourced a carbon-fiber Aeronaut CAM prop.
+              Ongoing build of a 3D-printed fixed-wing RC aircraft. Printing all structural components on a Bambu X1 Carbon, integrating a full avionics stack (brushless motor, ESC, servos, FlySky receiver, LiPo).
             </p>
             <div className="flex gap-2.5 flex-wrap">
               {["Bambu X1 Carbon printed", "Full avionics integration", "Carbon-fiber prop", "FEA structural analysis", "FlySky FS-iA10B"].map((s) => (
@@ -314,9 +314,9 @@ export default function Home() {
           <div className="p-8 px-10">
             <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">07</div>
             <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">Propulsion / Chemistry</div>
-            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">Solid Rocket Propellant — Sugar Fuel Synthesis &amp; Ignition Test</h3>
+            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">Sugar Fuel — A Bit of Dangerous Fun</h3>
             <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
-              Researched and synthesized a solid rocket propellant (potassium nitrate / sugar caramel mixture). Fabricated a simple nozzle casing and conducted a controlled ignition test. Built hands-on understanding of oxidizer-fuel ratios, burn characteristics, and energetic material handling.
+              Mixed and tested a potassium nitrate / sugar caramel propellant compound and tested the fuel in my backyard. A first experiment in oxidizer-fuel ratios and burn behavior.
             </p>
             <div className="flex gap-2.5 flex-wrap">
               {["KNO₃ / sugar mixture", "Custom nozzle casing", "Ignition tested", "Burn rate observed"].map((s) => (
@@ -368,15 +368,15 @@ export default function Home() {
             <p className="mb-5">
               I&apos;m a{" "}
               <strong className="text-primary font-semibold">freshman mechanical engineering student at Santa Clara University</strong>
-              , building a track record of hands-on technical projects before my first internship. My work spans aerodynamics research, avionics integration, engine rebuilds, product design, and propulsion chemistry.
+              . I build things.
             </p>
             <p className="mb-5">
               I&apos;m drawn to engineering problems where{" "}
               <strong className="text-primary font-semibold">physics meets hardware</strong> — where you can&apos;t just simulate your way to an answer and have to build, test, and iterate. That instinct led me to build a wind tunnel from scratch, fly a 3D-printed aircraft, and tear down a 100cc engine.
             </p>
             <p>
-              I&apos;m targeting{" "}
-              <strong className="text-primary font-semibold">summer 2026 internships</strong> in aerospace propulsion, vehicle dynamics, structures, or systems integration at companies pushing the frontier of flight and electrification.
+              I&apos;m looking for{" "}
+              <strong className="text-primary font-semibold">summer 2026 internships</strong> in aerospace or EV — anywhere the hardware is hard and the problems are unsolved.
             </p>
           </div>
         </div>
