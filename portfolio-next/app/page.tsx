@@ -117,9 +117,10 @@ export default function Home() {
             <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
             <Carousel
               images={[
-                { src: "/images/asset-00.jpg", alt: "Full wind tunnel setup" },
-                { src: "/images/asset-01.jpg", alt: "Straw laminar flow filter inlet" },
-                { src: "/images/asset-02.jpg", alt: "7 NACA 0015 airfoils" },
+                { src: "/images/wind-tunnel-setup.jpg", alt: "Full wind tunnel setup" },
+                { src: "/images/wind-tunnel-building.jpg", alt: "Building the wind tunnel" },
+                { src: "/images/wind-tunnel-inlet.jpg", alt: "Straw laminar flow inlet" },
+                { src: "/images/wind-tunnel-airfoils.jpg", alt: "7 NACA 0015 airfoils" },
               ]}
               containerClass="aspect-[3/1] max-[900px]:aspect-[4/3]"
               fit="cover"
@@ -144,7 +145,7 @@ export default function Home() {
                   ))}
                 </div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/asset-03.png" alt="QR wind tunnel" className="w-[60px] h-[60px] object-contain flex-shrink-0 bg-white p-1 border border-black/8" />
+                <img src="/images/wind-tunnel-qr.png" alt="QR wind tunnel" className="w-[60px] h-[60px] object-contain flex-shrink-0 bg-white p-1 border border-black/8" />
               </div>
             </div>
             {/* Col 2: description */}
@@ -170,12 +171,10 @@ export default function Home() {
         <div className="grid grid-cols-2 max-[900px]:grid-cols-1 border border-black/8 mb-8 transition-colors duration-300 hover:border-red/28">
           <Carousel
             images={[
-              { src: "/images/asset-04.png", alt: "Apple Pencil retention device" },
-              { src: "/images/asset-05.png", alt: "Device held showing mount" },
-              { src: "/images/asset-06.png", alt: "Drop test 1.5m" },
-              { src: "/images/asset-08.png", alt: "Exploded CAD diagram" },
-              { src: "/images/asset-09.png", alt: "Design iteration sheet" },
-              { src: "/images/asset-10.png", alt: "Drop test second angle" },
+              { src: "/images/pencil-device.png", alt: "Apple Pencil retention device" },
+              { src: "/images/pencil-held.png", alt: "Device held showing mount" },
+              { src: "/images/pencil-cad.png", alt: "Exploded CAD diagram" },
+              { src: "/images/pencil-iterations.png", alt: "Design iteration sheet" },
             ]}
             containerClass="aspect-[4/3]"
             fit="contain"
@@ -205,7 +204,7 @@ export default function Home() {
                 ))}
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/asset-07.png" alt="Apple Pencil project QR code" className="w-[72px] h-[72px] object-contain flex-shrink-0 bg-white p-1 border border-black/8" />
+              <img src="/images/pencil-qr.png" alt="Apple Pencil project QR code" className="w-[72px] h-[72px] object-contain flex-shrink-0 bg-white p-1 border border-black/8" />
             </div>
           </div>
         </div>
@@ -214,11 +213,11 @@ export default function Home() {
         <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
           <Carousel
             images={[
-              { src: "/images/asset-11.jpg", alt: "Completed Eclipson Wolf" },
-              { src: "/images/asset-12.jpg", alt: "Aircraft assembly" },
-              { src: "/images/asset-13.jpg", alt: "Fuselage assembly" },
-              { src: "/images/asset-14.jpg", alt: "Wing section" },
-              { src: "/images/asset-15.jpg", alt: "Carbon prop and motor" },
+              { src: "/images/rc-aircraft-complete.jpg", alt: "Completed Eclipson Wolf" },
+              { src: "/images/rc-aircraft-assembly.jpg", alt: "Aircraft assembly" },
+              { src: "/images/rc-aircraft-fuselage.jpg", alt: "Fuselage assembly" },
+              { src: "/images/rc-aircraft-wing.jpg", alt: "Wing section" },
+              { src: "/images/rc-aircraft-prop.jpg", alt: "Carbon prop and motor" },
             ]}
             containerClass="aspect-[4/3]"
             fit="contain"
@@ -242,9 +241,10 @@ export default function Home() {
         <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
           <Carousel
             images={[
-              { src: "/images/asset-16.jpg", alt: "100cc go-kart engine" },
-              { src: "/images/asset-17.jpg", alt: "Engine disassembly" },
-              { src: "/images/asset-18.jpg", alt: "Engine cylinder head" },
+              { src: "/images/engine-complete.jpg", alt: "100cc go-kart engine" },
+              { src: "/images/engine-gokart-chassis.jpg", alt: "Go-kart chassis" },
+              { src: "/images/engine-disassembly.jpg", alt: "Engine disassembly" },
+              { src: "/images/engine-cylinder.jpg", alt: "Engine cylinder head" },
             ]}
             containerClass="aspect-[3/4]"
             fit="contain"
@@ -264,62 +264,61 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── Projects 05 & 06 — minor cards (single portrait images) ──── */}
-        <div className="grid grid-cols-2 max-[900px]:grid-cols-1 gap-px bg-black/8 mb-px">
-          {[
-            {
-              src: "/images/asset-19.jpg", alt: "Raptor engine model",
-              num: "05", tag: "3D Printing / Modeling",
-              title: "SpaceX Raptor Engine — 3D Printed Scale Model",
-              desc: "Sourced and printed a detailed multi-part scale model of the SpaceX Raptor engine. Multi-material print in black and white PLA capturing turbopumps, plumbing, and bell geometry. Driven by interest in full-flow staged combustion propulsion.",
-              stats: ["Multi-material PLA", "Full-flow cycle reference"],
-            },
-            {
-              src: "/images/asset-20.jpg", alt: "Lego RC car build",
-              num: "06", tag: "Avionics Prototype",
-              title: "Lego RC Car — Avionics Prototyping Platform",
-              desc: "Built a functional RC car from a Lego Technic chassis to prototype and validate the aircraft avionics stack before installation — ESC, 2200mAh LiPo, steering servo, and FlySky FS-iA10B receiver, fully working under radio control.",
-              stats: ["FlySky FS-iA10B", "2200mAh LiPo", "Functional steering"],
-            },
-          ].map(({ src, alt, num, tag, title, desc, stats }) => (
-            <div key={num} className="bg-bg hover:bg-bg2 transition-colors duration-200">
-              <Carousel
-                images={[{ src, alt }]}
-                containerClass="aspect-[3/4]"
-                fit="contain"
-              />
-              <div className="p-6">
-                <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">{num}</div>
-                <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">{tag}</div>
-                <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">{title}</h3>
-                <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">{desc}</p>
-                <div className="flex gap-2.5 flex-wrap">
-                  {stats.map((s) => (
-                    <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* ── Project 07 — Rocket Propellant (portrait + landscape) ──────
-            asset-21: 1500×2000 PORTRAIT, asset-22: 480×360 LANDSCAPE        */}
-        <div className="border border-black/8 border-t-0 mb-6 transition-colors duration-300 hover:border-red/28">
+        {/* ── Project 05 — Raptor Model ──── */}
+        <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
           <Carousel
             images={[
-              { src: "/images/asset-21.jpg", alt: "Cooking sugar fuel mixture" },
-              { src: "/images/asset-22.jpg", alt: "Nozzle ignition test on grill" },
+              { src: "/images/raptor-model.jpg", alt: "SpaceX Raptor engine model" },
+              { src: "/images/raptor-model-held.jpg", alt: "Raptor model held" },
             ]}
             containerClass="aspect-[4/3]"
             fit="contain"
           />
           <div className="p-8 px-10">
+            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">05</div>
+            <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">3D Printing / Modeling</div>
+            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">SpaceX Raptor Engine — 3D Printed Scale Model</h3>
+            <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
+              Sourced and printed a detailed multi-part scale model of the SpaceX Raptor engine. Multi-material print in black and white PLA capturing turbopumps, plumbing, and bell geometry. Driven by interest in full-flow staged combustion propulsion.
+            </p>
+            <div className="flex gap-2.5 flex-wrap">
+              {["Multi-material PLA", "Full-flow cycle reference"].map((s) => (
+                <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Project 07 — Rocket Propellant ── */}
+        <div className="border border-black/8 border-t-0 mb-6 transition-colors duration-300 hover:border-red/28">
+          <Carousel
+            images={[
+              { src: "/images/rocket-fuel-cooking.jpg", alt: "Cooking sugar fuel mixture" },
+              { src: "/images/rocket-fuel-kno3.jpg", alt: "Potassium nitrate oxidizer" },
+              { src: "/images/rocket-fuel-ingredients.jpg", alt: "Fuel ingredients setup" },
+            ]}
+            containerClass="aspect-[4/3]"
+            fit="contain"
+          />
+          {/* Ignition video */}
+          <div className="border-t border-black/8 bg-bg2">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              className="w-full max-h-[420px] object-contain"
+            >
+              <source src="/images/rocket-ignition.mov" type="video/mp4" />
+            </video>
+          </div>
+          <div className="p-8 px-10">
             <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">07</div>
             <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">Propulsion / Chemistry</div>
             <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">Solid Rocket Propellant — Sugar Fuel Synthesis &amp; Ignition Test</h3>
             <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
-              Researched and synthesized a solid rocket propellant (potassium nitrate / sugar caramel mixture). Fabricated a simple nozzle casing and conducted a controlled ignition test. Built hands-on understanding of oxidizer-fuel ratios, burn characteristics, and energetic material handling. Video documentation of ignition available on request.
+              Researched and synthesized a solid rocket propellant (potassium nitrate / sugar caramel mixture). Fabricated a simple nozzle casing and conducted a controlled ignition test. Built hands-on understanding of oxidizer-fuel ratios, burn characteristics, and energetic material handling.
             </p>
             <div className="flex gap-2.5 flex-wrap">
               {["KNO₃ / sugar mixture", "Custom nozzle casing", "Ignition tested", "Burn rate observed"].map((s) => (
