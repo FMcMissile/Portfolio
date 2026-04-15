@@ -172,51 +172,63 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── Project 02 — Apple Pencil ────────────────────────────────────
-            5 images total (product shots + CAD/drop test) → carousel         */}
-        <div className="grid grid-cols-2 max-[900px]:grid-cols-1 border border-black/8 mb-8 transition-colors duration-300 hover:border-red/28">
-          <Carousel
-            images={[
-              { src: "/images/pencil-device.png", alt: "Apple Pencil retention device" },
-              { src: "/images/pencil-held.png", alt: "Device held showing mount" },
-              { src: "/images/pencil-cad.png", alt: "Exploded CAD diagram" },
-              { src: "/images/pencil-iterations.png", alt: "Design iteration sheet" },
-            ]}
-            containerClass="aspect-[4/3]"
-            fit="contain"
-          />
-          <div className="p-10 flex flex-col justify-between border-l border-black/8 max-[900px]:border-l-0 max-[900px]:border-t max-[900px]:border-black/8">
-            <div>
-              <div className="font-mono text-[11px] text-muted tracking-[0.2em] mb-2">02 / FEATURED</div>
-              <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-3 py-1 tracking-[0.15em] uppercase mb-5">Product Design &amp; Prototyping</div>
-              <h3 className="text-[1.55rem] font-extrabold tracking-[-0.02em] leading-[1.15] text-accent mb-4">Apple Pencil Retention Device — E-Waste Reduction</h3>
-              <p className="text-[0.87rem] text-muted leading-[1.7] mb-4">
+        {/* ── Project 02 — PenSafe ── full-width carousel + horizontal text ── */}
+        <div className="mb-8">
+          <div className="relative w-screen left-1/2 -translate-x-1/2">
+            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
+            <Carousel
+              images={[
+                { src: "/images/pencil-device.png", alt: "PenSafe retention device" },
+                { src: "/images/pencil-held.png", alt: "Device held showing mount" },
+                { src: "/images/pencil-cad.png", alt: "Exploded CAD diagram" },
+                { src: "/images/pencil-iterations.png", alt: "Design iteration sheet" },
+              ]}
+              containerClass="aspect-[3/1] max-[900px]:aspect-[4/3]"
+              fit="contain"
+            />
+          </div>
+          <div className="grid grid-cols-3 max-[900px]:grid-cols-1 border border-black/8 border-t-0 transition-colors duration-300 hover:border-red/28">
+            {/* Col 1: label + title + stats */}
+            <div className="p-8 border-r border-black/8 max-[900px]:border-r-0 max-[900px]:border-b flex flex-col justify-between gap-6">
+              <div>
+                <div className="font-mono text-[11px] text-muted tracking-[0.2em] mb-2">02 / FEATURED</div>
+                <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-3 py-1 tracking-[0.15em] uppercase mb-4">Product Design &amp; Prototyping</div>
+                <h3 className="text-[1.4rem] font-extrabold tracking-[-0.02em] leading-[1.15] text-accent">PenSafe — E-Waste Reduction</h3>
+              </div>
+              <div className="flex gap-5 flex-wrap items-end justify-between">
+                <div className="flex gap-5 flex-wrap">
+                  {[{ val: "€0.86", label: "Unit Cost" }, { val: "10N", label: "Pull Test ✓" }, { val: "20", label: "Drop Tests ✓" }].map(({ val, label }) => (
+                    <div key={label} className="flex flex-col">
+                      <span className="font-mono text-[1rem] font-bold text-red">{val}</span>
+                      <span className="font-mono text-[10px] text-muted tracking-[0.1em] uppercase mt-0.5">{label}</span>
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href="/Apple Pencil Project Julian - Engineering Portfolio.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[11px] text-red tracking-[0.1em] uppercase no-underline border border-red/28 px-3 py-2 hover:bg-red hover:text-white transition-all duration-200 flex-shrink-0"
+                >
+                  View Report →
+                </a>
+              </div>
+            </div>
+            {/* Col 2: description */}
+            <div className="p-8 border-r border-black/8 max-[900px]:border-r-0 max-[900px]:border-b">
+              <p className="text-[0.87rem] text-muted leading-[1.8]">
                 Identified a real problem in a school IT department and delivered a full engineering design cycle — from user interviews through 4+ prototype iterations to a validated, client-approved product.
               </p>
-              <ul className="proj-bullets list-none flex flex-col gap-2 mb-4">
+            </div>
+            {/* Col 3: bullets */}
+            <div className="p-8">
+              <ul className="proj-bullets list-none flex flex-col gap-3">
                 <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Interviewed school IT director who reported 8 lost/damaged peripherals per year (~€120 each); defined 16-point design specification covering child safety, ergonomics, and material toxicity</li>
                 <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Designed 6 competing concepts in Fusion 360 and selected optimal design through scoring and client feedback</li>
                 <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Prototyped in cardboard then PLA — passed 10N magnetic pull test and survived 20 drops from 1.5m</li>
                 <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Final product: €0.86 in filament, 26.72g, non-toxic PLA, no sharp edges, no choking hazards</li>
               </ul>
-            </div>
-            <div className="flex items-end justify-between gap-4 pt-4 border-t border-black/8">
-              <div className="flex gap-5 flex-wrap">
-                {[{ val: "€0.86", label: "Unit Cost" }, { val: "10N", label: "Pull Test ✓" }, { val: "20", label: "Drop Tests ✓" }].map(({ val, label }) => (
-                  <div key={label} className="flex flex-col">
-                    <span className="font-mono text-[1rem] font-bold text-red">{val}</span>
-                    <span className="font-mono text-[10px] text-muted tracking-[0.1em] uppercase mt-0.5">{label}</span>
-                  </div>
-                ))}
-              </div>
-              <a
-                href="/Apple Pencil Project Julian - Engineering Portfolio.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-[11px] text-red tracking-[0.1em] uppercase no-underline border border-red/28 px-3 py-2 hover:bg-red hover:text-white transition-all duration-200 flex-shrink-0"
-              >
-                View Report →
-              </a>
             </div>
           </div>
         </div>
