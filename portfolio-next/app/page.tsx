@@ -29,8 +29,8 @@ export default function Home() {
           src="/images/fsae-bg.jpg"
           alt=""
           aria-hidden
-          className="absolute inset-0 w-full h-full object-cover object-right pointer-events-none"
-          style={{ opacity: 0.92, transform: "scaleX(-1)" }}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ opacity: 0.92, transform: "scaleX(-1)", objectPosition: "15% center" }}
         />
         {/* dark gradient overlay so text stays readable */}
         <div
@@ -123,7 +123,7 @@ export default function Home() {
                 { src: "/images/wind-tunnel-airfoils.jpg", alt: "7 NACA 0015 airfoils" },
               ]}
               containerClass="aspect-[3/1] max-[900px]:aspect-[4/3]"
-              fit="cover"
+              fit="contain"
             />
           </div>
           {/* Horizontal 3-column text section */}
