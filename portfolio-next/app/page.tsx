@@ -30,12 +30,12 @@ export default function Home() {
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          style={{ opacity: 0.92, objectPosition: "65% center" }}
+          style={{ opacity: 0.92, objectPosition: "45% 20%" }}
         />
         {/* dark gradient overlay so text stays readable */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(to right, rgba(238,244,247,0.88) 40%, rgba(238,244,247,0.2) 75%)" }}
+          style={{ background: "linear-gradient(to right, rgba(238,244,247,0.6) 25%, rgba(238,244,247,0.0) 55%)" }}
           aria-hidden
         />
         <div
