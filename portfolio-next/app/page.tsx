@@ -30,7 +30,7 @@ export default function Home() {
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
-          style={{ opacity: 0.75 }}
+          style={{ opacity: 0.92 }}
         />
         {/* dark gradient overlay so text stays readable */}
         <div
@@ -111,13 +111,17 @@ export default function Home() {
         <div className="mb-8">
           {/* Edge-to-edge carousel */}
           <div className="relative w-screen left-1/2 -translate-x-1/2">
+            {/* Left fade */}
+            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none" />
+            {/* Right fade */}
+            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
             <Carousel
               images={[
                 { src: "/images/asset-00.jpg", alt: "Full wind tunnel setup" },
                 { src: "/images/asset-01.jpg", alt: "Straw laminar flow filter inlet" },
                 { src: "/images/asset-02.jpg", alt: "7 NACA 0015 airfoils" },
               ]}
-              containerClass="aspect-[21/9] max-[900px]:aspect-[4/3]"
+              containerClass="aspect-[3/1] max-[900px]:aspect-[4/3]"
               fit="cover"
             />
           </div>
