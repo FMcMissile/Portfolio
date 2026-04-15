@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-12 max-[900px]:px-6 py-5 bg-[rgba(8,10,14,0.92)] backdrop-blur-md border-b border-white/7">
+      <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-12 max-[900px]:px-6 py-5 bg-[rgba(255,255,255,0.92)] backdrop-blur-md border-b border-black/8">
         <Link href="/" className="font-mono text-[13px] text-red no-underline tracking-[0.05em]">
           JT // MECH-ENG
         </Link>
@@ -34,14 +34,14 @@ export default function Home() {
         {/* dark gradient overlay so text stays readable */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(to right, rgba(8,10,14,0.55) 35%, rgba(8,10,14,0.15) 100%)" }}
+          style={{ background: "linear-gradient(to right, rgba(238,244,247,0.72) 30%, rgba(238,244,247,0.15) 100%)" }}
           aria-hidden
         />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(204,34,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(204,34,0,0.04) 1px, transparent 1px)",
+              "linear-gradient(rgba(91,168,196,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(91,168,196,0.07) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
             maskImage: "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%)",
             WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%)",
@@ -77,7 +77,7 @@ export default function Home() {
       </div>
 
       {/* SKILLS TICKER */}
-      <div className="bg-bg2 border-t border-b border-white/7 py-6 overflow-hidden">
+      <div className="bg-bg2 border-t border-b border-black/8 py-6 overflow-hidden">
         <div className="flex gap-12 animate-ticker whitespace-nowrap">
           {[
             "Fusion 360","·","Aerodynamics","·","3D Printing","·","CAD / FEA","·",
@@ -106,51 +106,63 @@ export default function Home() {
           Engineering Projects
         </h2>
 
-        {/* ── Project 01 — Wind Tunnel ────────────────────────────────────
-            3 images: landscape + 2 portrait → carousel, object-contain      */}
-        <div className="grid grid-cols-2 max-[900px]:grid-cols-1 border border-white/7 mb-8 transition-colors duration-300 hover:border-red/28">
-          <Carousel
-            images={[
-              { src: "/images/asset-00.jpg", alt: "Full wind tunnel setup" },
-              { src: "/images/asset-01.jpg", alt: "Straw laminar flow filter inlet" },
-              { src: "/images/asset-02.jpg", alt: "7 NACA 0015 airfoils" },
-            ]}
-            containerClass="aspect-[4/3]"
-            fit="contain"
-          />
-          <div className="p-10 flex flex-col justify-between border-l border-white/7 max-[900px]:border-l-0 max-[900px]:border-t max-[900px]:border-white/7">
-            <div className="flex flex-col flex-1 min-h-0">
-              <div className="font-mono text-[11px] text-muted tracking-[0.2em] mb-2">01 / FEATURED</div>
-              <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-3 py-1 tracking-[0.15em] uppercase mb-5">Aerodynamics Research</div>
-              <h3 className="text-[1.55rem] font-extrabold tracking-[-0.02em] leading-[1.15] text-accent mb-4">Subsonic Wing Sweep Angle Optimization</h3>
-              <p className="text-[0.87rem] text-muted leading-[1.7] mb-4">
+        {/* ── Project 01 — Wind Tunnel ── full-width carousel + horizontal text ── */}
+        <div className="mb-8">
+          {/* Edge-to-edge carousel */}
+          <div className="relative w-screen left-1/2 -translate-x-1/2">
+            <Carousel
+              images={[
+                { src: "/images/asset-00.jpg", alt: "Full wind tunnel setup" },
+                { src: "/images/asset-01.jpg", alt: "Straw laminar flow filter inlet" },
+                { src: "/images/asset-02.jpg", alt: "7 NACA 0015 airfoils" },
+              ]}
+              containerClass="aspect-[21/9] max-[900px]:aspect-[4/3]"
+              fit="cover"
+            />
+          </div>
+          {/* Horizontal 3-column text section */}
+          <div className="grid grid-cols-3 max-[900px]:grid-cols-1 border border-black/8 border-t-0 transition-colors duration-300 hover:border-red/28">
+            {/* Col 1: label + title + stats */}
+            <div className="p-8 border-r border-black/8 max-[900px]:border-r-0 max-[900px]:border-b flex flex-col justify-between gap-6">
+              <div>
+                <div className="font-mono text-[11px] text-muted tracking-[0.2em] mb-2">01 / FEATURED</div>
+                <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-3 py-1 tracking-[0.15em] uppercase mb-4">Aerodynamics Research</div>
+                <h3 className="text-[1.4rem] font-extrabold tracking-[-0.02em] leading-[1.15] text-accent">Subsonic Wing Sweep Angle Optimization</h3>
+              </div>
+              <div className="flex gap-5 flex-wrap items-end justify-between">
+                <div className="flex gap-5 flex-wrap">
+                  {[{ val: "1,000+", label: "Data Points" }, { val: "3", label: "Wind Speeds" }, { val: "7", label: "Airfoils" }].map(({ val, label }) => (
+                    <div key={label} className="flex flex-col">
+                      <span className="font-mono text-[1rem] font-bold text-red">{val}</span>
+                      <span className="font-mono text-[10px] text-muted tracking-[0.1em] uppercase mt-0.5">{label}</span>
+                    </div>
+                  ))}
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/asset-03.png" alt="QR wind tunnel" className="w-[60px] h-[60px] object-contain flex-shrink-0 bg-white p-1 border border-black/8" />
+              </div>
+            </div>
+            {/* Col 2: description */}
+            <div className="p-8 border-r border-black/8 max-[900px]:border-r-0 max-[900px]:border-b">
+              <p className="text-[0.87rem] text-muted leading-[1.8]">
                 Designed and built a custom wind tunnel from scratch to experimentally determine the optimal wing sweep angle for maximizing lift-to-drag ratio — corroborating variable-sweep logic used in the F-14 Tomcat.
               </p>
-              <ul className="proj-bullets list-none flex flex-col gap-2 mb-4 flex-1">
+            </div>
+            {/* Col 3: bullets */}
+            <div className="p-8">
+              <ul className="proj-bullets list-none flex flex-col gap-3">
                 <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Designed 7 NACA 0015 airfoils (0°–60° sweep) in Fusion 360, 3D printed to 0.2mm accuracy on Bambu X1 Carbon</li>
                 <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Engineered 2 wind tunnel iterations with laminar flow straw filter, pulley-based drag measurement, and rail-mounted force isolation cart</li>
                 <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Drag decreases significantly past 30° sweep; lift follows a cos² relationship — supporting variable-sweep aircraft design</li>
                 <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Proposed CFD simulation as validated next step to eliminate experimental uncertainty</li>
               </ul>
             </div>
-            <div className="flex items-end justify-between gap-4 pt-4 border-t border-white/7">
-              <div className="flex gap-5 flex-wrap">
-                {[{ val: "1,000+", label: "Data Points" }, { val: "3", label: "Wind Speeds" }, { val: "7", label: "Airfoils" }].map(({ val, label }) => (
-                  <div key={label} className="flex flex-col">
-                    <span className="font-mono text-[1rem] font-bold text-red">{val}</span>
-                    <span className="font-mono text-[10px] text-muted tracking-[0.1em] uppercase mt-0.5">{label}</span>
-                  </div>
-                ))}
-              </div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/asset-03.png" alt="QR wind tunnel" className="w-[72px] h-[72px] object-contain flex-shrink-0 invert bg-black p-1" />
-            </div>
           </div>
         </div>
 
         {/* ── Project 02 — Apple Pencil ────────────────────────────────────
             5 images total (product shots + CAD/drop test) → carousel         */}
-        <div className="grid grid-cols-2 max-[900px]:grid-cols-1 border border-white/7 mb-8 transition-colors duration-300 hover:border-red/28">
+        <div className="grid grid-cols-2 max-[900px]:grid-cols-1 border border-black/8 mb-8 transition-colors duration-300 hover:border-red/28">
           <Carousel
             images={[
               { src: "/images/asset-04.png", alt: "Apple Pencil retention device" },
@@ -163,7 +175,7 @@ export default function Home() {
             containerClass="aspect-[4/3]"
             fit="contain"
           />
-          <div className="p-10 flex flex-col justify-between border-l border-white/7 max-[900px]:border-l-0 max-[900px]:border-t max-[900px]:border-white/7">
+          <div className="p-10 flex flex-col justify-between border-l border-black/8 max-[900px]:border-l-0 max-[900px]:border-t max-[900px]:border-black/8">
             <div>
               <div className="font-mono text-[11px] text-muted tracking-[0.2em] mb-2">02 / FEATURED</div>
               <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-3 py-1 tracking-[0.15em] uppercase mb-5">Product Design &amp; Prototyping</div>
@@ -178,7 +190,7 @@ export default function Home() {
                 <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Final product: €0.86 in filament, 26.72g, non-toxic PLA, no sharp edges, no choking hazards</li>
               </ul>
             </div>
-            <div className="flex items-end justify-between gap-4 pt-4 border-t border-white/7">
+            <div className="flex items-end justify-between gap-4 pt-4 border-t border-black/8">
               <div className="flex gap-5 flex-wrap">
                 {[{ val: "€0.86", label: "Unit Cost" }, { val: "10N", label: "Pull Test ✓" }, { val: "20", label: "Drop Tests ✓" }].map(({ val, label }) => (
                   <div key={label} className="flex flex-col">
@@ -188,13 +200,13 @@ export default function Home() {
                 ))}
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/asset-07.png" alt="Apple Pencil project QR code" className="w-[72px] h-[72px] object-contain flex-shrink-0 invert bg-black p-1" />
+              <img src="/images/asset-07.png" alt="Apple Pencil project QR code" className="w-[72px] h-[72px] object-contain flex-shrink-0 bg-white p-1 border border-black/8" />
             </div>
           </div>
         </div>
 
         {/* ── Project 03 — RC Aircraft (5 images, mixed orientations) ──── */}
-        <div className="border border-white/7 mb-6 transition-colors duration-300 hover:border-red/28">
+        <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
           <Carousel
             images={[
               { src: "/images/asset-11.jpg", alt: "Completed Eclipson Wolf" },
@@ -222,7 +234,7 @@ export default function Home() {
         </div>
 
         {/* ── Project 04 — Engine Rebuild (3 portrait images) ──────────── */}
-        <div className="border border-white/7 mb-6 transition-colors duration-300 hover:border-red/28">
+        <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
           <Carousel
             images={[
               { src: "/images/asset-16.jpg", alt: "100cc go-kart engine" },
@@ -248,7 +260,7 @@ export default function Home() {
         </div>
 
         {/* ── Projects 05 & 06 — minor cards (single portrait images) ──── */}
-        <div className="grid grid-cols-2 max-[900px]:grid-cols-1 gap-px bg-white/7 mb-px">
+        <div className="grid grid-cols-2 max-[900px]:grid-cols-1 gap-px bg-black/8 mb-px">
           {[
             {
               src: "/images/asset-19.jpg", alt: "Raptor engine model",
@@ -288,7 +300,7 @@ export default function Home() {
 
         {/* ── Project 07 — Rocket Propellant (portrait + landscape) ──────
             asset-21: 1500×2000 PORTRAIT, asset-22: 480×360 LANDSCAPE        */}
-        <div className="border border-white/7 border-t-0 mb-6 transition-colors duration-300 hover:border-red/28">
+        <div className="border border-black/8 border-t-0 mb-6 transition-colors duration-300 hover:border-red/28">
           <Carousel
             images={[
               { src: "/images/asset-21.jpg", alt: "Cooking sugar fuel mixture" },
@@ -314,7 +326,7 @@ export default function Home() {
       </div>
 
       {/* DIVIDER */}
-      <div className="h-px bg-white/7 mx-12 max-[900px]:mx-6" />
+      <div className="h-px bg-black/8 mx-12 max-[900px]:mx-6" />
 
       {/* SKILLS */}
       <div className="px-12 max-[900px]:px-6 py-24 max-w-[1200px] mx-auto" id="skills">
@@ -322,7 +334,7 @@ export default function Home() {
         <h2 className="font-extrabold tracking-[-0.03em] leading-[1.05] mb-12 text-accent" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
           Skills &amp; Tools
         </h2>
-        <div className="grid grid-cols-3 max-[900px]:grid-cols-1 gap-px bg-white/7">
+        <div className="grid grid-cols-3 max-[900px]:grid-cols-1 gap-px bg-black/8">
           {[
             { title: "// CAD & Simulation", items: ["Fusion 360 (parametric modeling)", "FEA structural analysis", "CFD (familiarization)", "NACA airfoil design", "Assembly & tolerance design"] },
             { title: "// Manufacturing", items: ["FDM 3D printing (Bambu X1 Carbon)", "Multi-material PLA printing", "Gas engine disassembly & rebuild", "Mechanical assembly", "Rapid prototyping"] },
@@ -341,7 +353,7 @@ export default function Home() {
       </div>
 
       {/* DIVIDER */}
-      <div className="h-px bg-white/7 mx-12 max-[900px]:mx-6" />
+      <div className="h-px bg-black/8 mx-12 max-[900px]:mx-6" />
 
       {/* ABOUT */}
       <div className="px-12 max-[900px]:px-6 py-24 max-w-[1200px] mx-auto" id="about">
@@ -369,7 +381,7 @@ export default function Home() {
       </div>
 
       {/* CONTACT */}
-      <div className="bg-bg2 border-t border-white/7" id="contact">
+      <div className="bg-bg2 border-t border-black/8" id="contact">
         <div className="max-w-[1200px] mx-auto px-12 max-[900px]:px-6 py-20 flex justify-between items-center gap-12 flex-wrap max-[900px]:flex-col">
           <div>
             <div className="section-label font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-3 flex items-center gap-3">Available Summer 2026</div>
@@ -385,7 +397,7 @@ export default function Home() {
             ].map(({ href, icon, label, external }) => (
               <a key={href} href={href} className="flex items-center gap-4 font-mono text-[13px] text-muted no-underline hover:text-red transition-colors duration-200"
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
-                <div className="w-9 h-9 border border-white/7 flex items-center justify-center text-[14px] flex-shrink-0">{icon}</div>
+                <div className="w-9 h-9 border border-black/8 flex items-center justify-center text-[14px] flex-shrink-0">{icon}</div>
                 {label}
               </a>
             ))}
@@ -394,7 +406,7 @@ export default function Home() {
       </div>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/7 px-12 max-[900px]:px-6 py-6 flex justify-between items-center max-[900px]:flex-col max-[900px]:gap-2 max-[900px]:text-center">
+      <footer className="border-t border-black/8 px-12 max-[900px]:px-6 py-6 flex justify-between items-center max-[900px]:flex-col max-[900px]:gap-2 max-[900px]:text-center">
         <span className="font-mono text-[11px] text-muted tracking-[0.1em]">© 2026 Julian Trotzenberg</span>
         <span className="font-mono text-[11px] text-muted tracking-[0.1em]">Mechanical Engineering · Santa Clara University · Class of 2029</span>
       </footer>

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     "Mechanical engineering student at Santa Clara University — aerodynamics, avionics, prototyping, and propulsion projects.",
   icons: {
-    icon: "/images/JT-Logo.svg",
+    icon: "/favicon.svg",
   },
 };
 

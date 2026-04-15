@@ -33,7 +33,7 @@ export default function Carousel({
   const single = images.length === 1;
 
   return (
-    <div className={`relative w-full overflow-hidden bg-black ${containerClass}`}>
+    <div className={`relative w-full overflow-hidden bg-bg ${containerClass}`}>
       {/* Slide track */}
       <div
         className="flex h-full transition-transform duration-500 ease-in-out will-change-transform"
@@ -45,7 +45,7 @@ export default function Carousel({
             <img
               src={src}
               alt={alt}
-              className={`w-full h-full ${fit === "contain" ? "object-contain" : "object-cover"} block brightness-[0.88] hover:brightness-100 transition-[filter] duration-300`}
+              className={`w-full h-full ${fit === "contain" ? "object-contain" : "object-cover"} block`}
             />
           </div>
         ))}
@@ -57,14 +57,14 @@ export default function Carousel({
           <button
             onClick={prev}
             aria-label="Previous image"
-            className="absolute left-0 top-0 h-full px-3 flex items-center text-white/60 hover:text-white bg-gradient-to-r from-black/40 to-transparent transition-colors duration-200 cursor-pointer"
+            className="absolute left-0 top-0 h-full px-3 flex items-center text-gray-500 hover:text-gray-900 bg-gradient-to-r from-white/60 to-transparent transition-colors duration-200 cursor-pointer"
           >
             <span className="font-mono text-[18px] leading-none select-none">←</span>
           </button>
           <button
             onClick={next}
             aria-label="Next image"
-            className="absolute right-0 top-0 h-full px-3 flex items-center text-white/60 hover:text-white bg-gradient-to-l from-black/40 to-transparent transition-colors duration-200 cursor-pointer"
+            className="absolute right-0 top-0 h-full px-3 flex items-center text-gray-500 hover:text-gray-900 bg-gradient-to-l from-white/60 to-transparent transition-colors duration-200 cursor-pointer"
           >
             <span className="font-mono text-[18px] leading-none select-none">→</span>
           </button>
@@ -80,7 +80,7 @@ export default function Carousel({
               onClick={() => setCurrent(i)}
               aria-label={`Go to image ${i + 1}`}
               className={`w-1.5 h-1.5 transition-all duration-200 cursor-pointer ${
-                i === current ? "bg-red scale-125" : "bg-white/40 hover:bg-white/70"
+                i === current ? "bg-red scale-125" : "bg-black/25 hover:bg-black/50"
               }`}
             />
           ))}
@@ -89,7 +89,7 @@ export default function Carousel({
 
       {/* Counter */}
       {!single && (
-        <div className="absolute top-3 right-3 font-mono text-[10px] text-white/50 tracking-[0.15em] bg-black/40 px-2 py-0.5">
+        <div className="absolute top-3 right-3 font-mono text-[10px] text-gray-500 tracking-[0.15em] bg-white/70 px-2 py-0.5">
           {current + 1} / {images.length}
         </div>
       )}
