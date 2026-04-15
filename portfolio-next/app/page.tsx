@@ -8,7 +8,7 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-12 max-[900px]:px-6 py-5 bg-[rgba(255,255,255,0.92)] backdrop-blur-md border-b border-black/8">
         <Link href="/" className="no-underline flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/JT-Logo-Rainbow.svg" alt="JT Logo" className="h-10 w-auto" />
+          <img src="/favicon.svg" alt="JT Logo" className="h-10 w-auto" />
         </Link>
         <ul className="flex gap-10 list-none max-[900px]:hidden">
           {["Projects", "Skills", "About", "Contact"].map((item) => (

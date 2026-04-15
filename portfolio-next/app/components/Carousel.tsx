@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 interface CarouselImage {
   src: string;
@@ -12,14 +12,20 @@ interface CarouselProps {
   containerClass?: string;
   /** object-contain keeps full image visible; object-cover fills the frame */
   fit?: "contain" | "cover";
+  /** Auto-advance interval in ms (default 3500). Pass 0 to disable. */
+  autoPlay?: number;
 }
 
 export default function Carousel({
   images,
   containerClass = "aspect-[4/3]",
   fit = "contain",
+  autoPlay = 3500,
 }: CarouselProps) {
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const visibleRef = useRef(false);
 
   const prev = useCallback(
     () => setCurrent((c) => (c - 1 + images.length) % images.length),
@@ -32,8 +38,32 @@ export default function Carousel({
 
   const single = images.length === 1;
 
+  // Auto-advance when visible
+  useEffect(() => {
+    if (single || autoPlay === 0) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => { visibleRef.current = entry.isIntersecting; },
+      { threshold: 0.3 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+
+    const interval = setInterval(() => {
+      if (visibleRef.current && !paused) {
+        setCurrent((c) => (c + 1) % images.length);
+      }
+    }, autoPlay);
+
+    return () => { observer.disconnect(); clearInterval(interval); };
+  }, [single, autoPlay, paused, images.length]);
+
   return (
-    <div className={`relative w-full overflow-hidden bg-bg ${containerClass}`}>
+    <div
+      ref={containerRef}
+      className={`relative w-full overflow-hidden bg-bg ${containerClass}`}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       {/* Slide track */}
       <div
         className="flex h-full transition-transform duration-500 ease-in-out will-change-transform"
