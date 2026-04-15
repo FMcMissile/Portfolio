@@ -144,8 +144,14 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/wind-tunnel-qr.png" alt="QR wind tunnel" className="w-[60px] h-[60px] object-contain flex-shrink-0 bg-white p-1 border border-black/8" />
+                <a
+                  href="/Aerodynamics Research Project Julian.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[11px] text-red tracking-[0.1em] uppercase no-underline border border-red/28 px-3 py-2 hover:bg-red hover:text-white transition-all duration-200 flex-shrink-0"
+                >
+                  View Report →
+                </a>
               </div>
             </div>
             {/* Col 2: description */}
@@ -203,8 +209,14 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/pencil-qr.png" alt="Apple Pencil project QR code" className="w-[72px] h-[72px] object-contain flex-shrink-0 bg-white p-1 border border-black/8" />
+              <a
+                href="/Apple Pencil Project Julian - Engineering Portfolio.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[11px] text-red tracking-[0.1em] uppercase no-underline border border-red/28 px-3 py-2 hover:bg-red hover:text-white transition-all duration-200 flex-shrink-0"
+              >
+                View Report →
+              </a>
             </div>
           </div>
         </div>
