@@ -1,743 +1,394 @@
-/* eslint-disable @next/next/no-img-element -- portfolio uses varied aspect ratios; native img matches original layout */
-import type { CSSProperties } from "react";
 import Link from "next/link";
-
-const windTop: CSSProperties = {
-  width: "100%",
-  flex: "0 0 300px",
-  objectFit: "cover",
-  objectPosition: "center top",
-  display: "block",
-  filter: "brightness(0.9)",
-  borderBottom: "1px solid rgba(255,255,255,0.07)",
-};
-
-const windBottom: CSSProperties = {
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  objectPosition: "center center",
-  display: "block",
-  filter: "brightness(0.82)",
-};
-
-const windBottomRight: CSSProperties = {
-  ...windBottom,
-  objectPosition: "center 20%",
-  borderLeft: "1px solid rgba(255,255,255,0.07)",
-};
-
-const photoSide: CSSProperties = {
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  display: "block",
-  filter: "brightness(0.88)",
-};
-
-const stripContain: CSSProperties = {
-  width: "100%",
-  height: "220px",
-  objectFit: "contain",
-  background: "#f8f8f8",
-  display: "block",
-};
-
-const stripCover: CSSProperties = {
-  width: "100%",
-  height: "220px",
-  objectFit: "cover",
-  display: "block",
-  filter: "brightness(0.85)",
-};
-
-const stripTall: CSSProperties = {
-  width: "100%",
-  height: "240px",
-  objectFit: "cover",
-  display: "block",
-  filter: "brightness(0.85)",
-};
-
-const cardImg: CSSProperties = {
-  width: "100%",
-  height: "200px",
-  objectFit: "cover",
-  display: "block",
-  filter: "brightness(0.8)",
-};
+import Carousel from "./components/Carousel";
 
 export default function Home() {
   return (
     <>
-      <nav>
-        <Link href="/" className="nav-logo">
+      {/* NAV */}
+      <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-12 max-[900px]:px-6 py-5 bg-[rgba(8,10,14,0.92)] backdrop-blur-md border-b border-white/7">
+        <Link href="/" className="font-mono text-[13px] text-red no-underline tracking-[0.05em]">
           JT // MECH-ENG
         </Link>
-        <ul className="nav-links">
-          <li>
-            <a href="#projects">Projects</a>
-          </li>
-          <li>
-            <a href="#skills">Skills</a>
-          </li>
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
+        <ul className="flex gap-10 list-none max-[900px]:hidden">
+          {["Projects", "Skills", "About", "Contact"].map((item) => (
+            <li key={item}>
+              <a href={`#${item.toLowerCase()}`} className="font-mono text-[11px] text-muted no-underline tracking-[0.1em] uppercase hover:text-accent transition-colors duration-200">
+                {item}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
 
-      <div className="hero">
-        <div className="hero-grid" aria-hidden />
-        <div className="hero-tag">
+      {/* HERO */}
+      <div className="min-h-screen flex flex-col justify-center px-12 max-[900px]:px-6 relative overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(204,34,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(204,34,0,0.04) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+            maskImage: "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%)",
+          }}
+          aria-hidden
+        />
+        <div className="hero-tag font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-6 flex items-center gap-3 relative">
           Freshman · Santa Clara University · Class of 2029
         </div>
-        <h1 className="hero-name">
-          Julian<span>Trotzenberg</span>
+        <h1 className="font-extrabold leading-[0.95] tracking-[-0.03em] mb-6 text-accent relative" style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
+          Julian<span className="text-red block">Trotzenberg</span>
         </h1>
-        <p className="hero-desc">
-          Mechanical engineering student building <strong>real hardware</strong>{" "}
-          — from custom wind tunnels and aerodynamics experiments to 3D-printed
-          flight systems. Targeting roles in{" "}
-          <strong>aerospace &amp; propulsion</strong> and{" "}
-          <strong>electric vehicle</strong> development.
+        <p className="text-[1.1rem] text-muted max-w-[540px] mb-12 leading-[1.7] relative">
+          Mechanical engineering student building{" "}
+          <strong className="text-primary font-semibold">real hardware</strong> — from custom wind
+          tunnels and aerodynamics experiments to 3D-printed flight systems. Targeting roles in{" "}
+          <strong className="text-primary font-semibold">aerospace &amp; propulsion</strong> and{" "}
+          <strong className="text-primary font-semibold">electric vehicle</strong> development.
         </p>
-        <div className="hero-cta">
-          <a href="#projects" className="btn-primary">
+        <div className="flex gap-4 flex-wrap relative">
+          <a href="#projects" className="inline-flex items-center gap-2 px-8 py-[0.85rem] bg-red text-white font-mono text-[12px] font-bold tracking-[0.1em] uppercase no-underline hover:opacity-85 hover:-translate-y-px transition-all duration-200">
             View Work ↓
           </a>
-          <a href="mailto:jtrotzenberg@scu.edu" className="btn-outline">
+          <a href="mailto:jtrotzenberg@scu.edu" className="inline-flex items-center gap-2 px-8 py-[0.85rem] bg-transparent text-primary font-mono text-[12px] tracking-[0.1em] uppercase no-underline border border-red/28 hover:border-red hover:text-red transition-all duration-200">
             Get in Touch
           </a>
         </div>
-        <div className="hero-stats">
-          <div className="hero-stat">
-            <div className="hero-stat-num">1K+</div>
-            <div className="hero-stat-label">Data Points</div>
-          </div>
-          <div className="hero-stat">
-            <div className="hero-stat-num">7</div>
-            <div className="hero-stat-label">Airfoils Built</div>
-          </div>
-          <div className="hero-stat">
-            <div className="hero-stat-num">6</div>
-            <div className="hero-stat-label">Projects</div>
-          </div>
+        <div className="absolute right-16 top-1/2 -translate-y-1/2 flex flex-col gap-8 max-[900px]:hidden">
+          {[{ num: "1K+", label: "Data Points" }, { num: "7", label: "Airfoils Built" }, { num: "6", label: "Projects" }].map(({ num, label }) => (
+            <div key={label} className="text-right border-r border-red/28 pr-6">
+              <div className="font-mono text-[2rem] font-bold text-red leading-none">{num}</div>
+              <div className="font-mono text-[10px] text-muted tracking-[0.15em] uppercase mt-1">{label}</div>
+            </div>
+          ))}
         </div>
-        <div className="scroll-hint">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 font-mono text-[10px] text-muted tracking-[0.15em] uppercase">
           <span>Scroll</span>
-          <div className="scroll-line" />
+          <div className="w-px h-10 bg-gradient-to-b from-red to-transparent animate-scroll-pulse" />
         </div>
       </div>
 
-      <div className="skills-section">
-        <div className="skills-ticker">
-          <span className="accent">Fusion 360</span>
-          <span>·</span>
-          <span>Aerodynamics</span>
-          <span>·</span>
-          <span className="accent">3D Printing</span>
-          <span>·</span>
-          <span>CAD / FEA</span>
-          <span>·</span>
-          <span className="accent">Avionics Integration</span>
-          <span>·</span>
-          <span>Wind Tunnel Testing</span>
-          <span>·</span>
-          <span className="accent">Product Design</span>
-          <span>·</span>
-          <span className="accent">NACA Airfoils</span>
-          <span>·</span>
-          <span>Rapid Prototyping</span>
-          <span>·</span>
-          <span className="accent">Data Analysis</span>
-          <span>·</span>
-          <span>L/D Optimization</span>
-          <span>·</span>
-          <span className="accent">Gas Engine Rebuild</span>
-          <span>·</span>
-          <span>Flight Systems</span>
-          <span>·</span>
-          <span className="accent">Fusion 360</span>
-          <span>·</span>
-          <span>Aerodynamics</span>
-          <span>·</span>
-          <span className="accent">3D Printing</span>
-          <span>·</span>
-          <span>CAD / FEA</span>
-          <span>·</span>
-          <span className="accent">Avionics Integration</span>
-          <span>·</span>
-          <span>Wind Tunnel Testing</span>
-          <span>·</span>
-          <span className="accent">Product Design</span>
-          <span>·</span>
-          <span className="accent">NACA Airfoils</span>
-          <span>·</span>
-          <span>Rapid Prototyping</span>
-          <span>·</span>
-          <span className="accent">Data Analysis</span>
-          <span>·</span>
-          <span>L/D Optimization</span>
-          <span>·</span>
-          <span className="accent">Gas Engine Rebuild</span>
-          <span>·</span>
-          <span>Flight Systems</span>
-          <span>·</span>
+      {/* SKILLS TICKER */}
+      <div className="bg-bg2 border-t border-b border-white/7 py-6 overflow-hidden">
+        <div className="flex gap-12 animate-ticker whitespace-nowrap">
+          {[
+            "Fusion 360","·","Aerodynamics","·","3D Printing","·","CAD / FEA","·",
+            "Avionics Integration","·","Wind Tunnel Testing","·","Product Design","·",
+            "NACA Airfoils","·","Rapid Prototyping","·","Data Analysis","·",
+            "L/D Optimization","·","Gas Engine Rebuild","·","Flight Systems","·",
+            "Fusion 360","·","Aerodynamics","·","3D Printing","·","CAD / FEA","·",
+            "Avionics Integration","·","Wind Tunnel Testing","·","Product Design","·",
+            "NACA Airfoils","·","Rapid Prototyping","·","Data Analysis","·",
+            "L/D Optimization","·","Gas Engine Rebuild","·","Flight Systems","·",
+          ].map((item, i) => (
+            <span key={i} className={`font-mono text-[12px] tracking-[0.1em] uppercase flex-shrink-0 ${
+              ["Fusion 360","3D Printing","Avionics Integration","Product Design","NACA Airfoils","Data Analysis","Gas Engine Rebuild"].includes(item)
+                ? "text-red" : "text-muted"
+            }`}>
+              {item}
+            </span>
+          ))}
         </div>
       </div>
 
-      <div className="section-wrap" id="projects">
-        <div className="section-label">Selected Work</div>
-        <h2 className="section-title">Engineering Projects</h2>
+      {/* PROJECTS */}
+      <div className="px-12 max-[900px]:px-6 py-24 max-w-[1200px] mx-auto" id="projects">
+        <div className="section-label font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-3 flex items-center gap-3">Selected Work</div>
+        <h2 className="font-extrabold tracking-[-0.03em] leading-[1.05] mb-12 text-accent" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
+          Engineering Projects
+        </h2>
 
-        <div className="project-featured">
-          <div className="proj-photo-col">
-            <img
-              src="/images/asset-00.jpg"
-              alt="Full wind tunnel setup"
-              style={windTop}
-            />
-            <div className="proj-photo-bottom-row">
-              <img
-                src="/images/asset-01.jpg"
-                alt="Straw laminar flow filter inlet"
-                style={windBottom}
-              />
-              <img
-                src="/images/asset-02.jpg"
-                alt="7 NACA 0015 airfoils"
-                style={windBottomRight}
-              />
-            </div>
-          </div>
-          <div className="project-featured-content">
-            <div
-              style={{
-                flex: 1,
-                minHeight: 0,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <div className="proj-num">01 / FEATURED</div>
-              <div className="proj-tag">Aerodynamics Research</div>
-              <h3 className="proj-title">
-                Subsonic Wing Sweep Angle Optimization
-              </h3>
-              <p className="proj-summary">
-                Designed and built a custom wind tunnel from scratch to
-                experimentally determine the optimal wing sweep angle for
-                maximizing lift-to-drag ratio — corroborating variable-sweep
-                logic used in the F-14 Tomcat.
+        {/* ── Project 01 — Wind Tunnel ────────────────────────────────────
+            3 images: landscape + 2 portrait → carousel, object-contain      */}
+        <div className="grid grid-cols-2 max-[900px]:grid-cols-1 border border-white/7 mb-8 transition-colors duration-300 hover:border-red/28">
+          <Carousel
+            images={[
+              { src: "/images/asset-00.jpg", alt: "Full wind tunnel setup" },
+              { src: "/images/asset-01.jpg", alt: "Straw laminar flow filter inlet" },
+              { src: "/images/asset-02.jpg", alt: "7 NACA 0015 airfoils" },
+            ]}
+            containerClass="aspect-[4/3]"
+            fit="contain"
+          />
+          <div className="p-10 flex flex-col justify-between border-l border-white/7 max-[900px]:border-l-0 max-[900px]:border-t max-[900px]:border-white/7">
+            <div className="flex flex-col flex-1 min-h-0">
+              <div className="font-mono text-[11px] text-muted tracking-[0.2em] mb-2">01 / FEATURED</div>
+              <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-3 py-1 tracking-[0.15em] uppercase mb-5">Aerodynamics Research</div>
+              <h3 className="text-[1.55rem] font-extrabold tracking-[-0.02em] leading-[1.15] text-accent mb-4">Subsonic Wing Sweep Angle Optimization</h3>
+              <p className="text-[0.87rem] text-muted leading-[1.7] mb-4">
+                Designed and built a custom wind tunnel from scratch to experimentally determine the optimal wing sweep angle for maximizing lift-to-drag ratio — corroborating variable-sweep logic used in the F-14 Tomcat.
               </p>
-              <ul className="proj-bullets">
-                <li>
-                  Designed 7 NACA 0015 airfoils (0°–60° sweep) in Fusion 360, 3D
-                  printed to 0.2mm accuracy on Bambu X1 Carbon
-                </li>
-                <li>
-                  Engineered 2 wind tunnel iterations with laminar flow straw
-                  filter, pulley-based drag measurement, and rail-mounted force
-                  isolation cart
-                </li>
-                <li>
-                  Drag decreases significantly past 30° sweep; lift follows a
-                  cos² relationship — supporting variable-sweep aircraft design
-                </li>
-                <li>
-                  Proposed CFD simulation as validated next step to eliminate
-                  experimental uncertainty
-                </li>
+              <ul className="proj-bullets list-none flex flex-col gap-2 mb-4 flex-1">
+                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Designed 7 NACA 0015 airfoils (0°–60° sweep) in Fusion 360, 3D printed to 0.2mm accuracy on Bambu X1 Carbon</li>
+                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Engineered 2 wind tunnel iterations with laminar flow straw filter, pulley-based drag measurement, and rail-mounted force isolation cart</li>
+                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Drag decreases significantly past 30° sweep; lift follows a cos² relationship — supporting variable-sweep aircraft design</li>
+                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Proposed CFD simulation as validated next step to eliminate experimental uncertainty</li>
               </ul>
             </div>
-            <div className="proj-bottom">
-              <div className="proj-metrics">
-                <div className="proj-metric">
-                  <div className="proj-metric-val">1,000+</div>
-                  <div className="proj-metric-label">Data Points</div>
-                </div>
-                <div className="proj-metric">
-                  <div className="proj-metric-val">3</div>
-                  <div className="proj-metric-label">Wind Speeds</div>
-                </div>
-                <div className="proj-metric">
-                  <div className="proj-metric-val">7</div>
-                  <div className="proj-metric-label">Airfoils</div>
-                </div>
+            <div className="flex items-end justify-between gap-4 pt-4 border-t border-white/7">
+              <div className="flex gap-5 flex-wrap">
+                {[{ val: "1,000+", label: "Data Points" }, { val: "3", label: "Wind Speeds" }, { val: "7", label: "Airfoils" }].map(({ val, label }) => (
+                  <div key={label} className="flex flex-col">
+                    <span className="font-mono text-[1rem] font-bold text-red">{val}</span>
+                    <span className="font-mono text-[10px] text-muted tracking-[0.1em] uppercase mt-0.5">{label}</span>
+                  </div>
+                ))}
               </div>
-              <img
-                src="/images/asset-03.png"
-                alt="QR wind tunnel"
-                className="proj-qr"
-              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/asset-03.png" alt="QR wind tunnel" className="w-[72px] h-[72px] object-contain flex-shrink-0 invert bg-black p-1" />
             </div>
           </div>
         </div>
 
-        <div className="project-featured">
-          <div
-            className="proj-photos-side"
-            style={{ gridTemplateColumns: "1.2fr 1fr" }}
-          >
-            <div className="photo-big">
-              <img
-                src="/images/asset-04.png"
-                alt="Apple Pencil retention device"
-                style={photoSide}
-              />
-            </div>
-            <div className="photo-right">
-              <img
-                src="/images/asset-05.png"
-                alt="Device held showing mount"
-                style={photoSide}
-              />
-            </div>
-            <div className="photo-right">
-              <img
-                src="/images/asset-06.png"
-                alt="Drop test 1.5m"
-                style={photoSide}
-              />
-            </div>
-          </div>
-          <div className="project-featured-content">
+        {/* ── Project 02 — Apple Pencil ────────────────────────────────────
+            5 images total (product shots + CAD/drop test) → carousel         */}
+        <div className="grid grid-cols-2 max-[900px]:grid-cols-1 border border-white/7 mb-8 transition-colors duration-300 hover:border-red/28">
+          <Carousel
+            images={[
+              { src: "/images/asset-04.png", alt: "Apple Pencil retention device" },
+              { src: "/images/asset-05.png", alt: "Device held showing mount" },
+              { src: "/images/asset-06.png", alt: "Drop test 1.5m" },
+              { src: "/images/asset-08.png", alt: "Exploded CAD diagram" },
+              { src: "/images/asset-09.png", alt: "Design iteration sheet" },
+              { src: "/images/asset-10.png", alt: "Drop test second angle" },
+            ]}
+            containerClass="aspect-[4/3]"
+            fit="contain"
+          />
+          <div className="p-10 flex flex-col justify-between border-l border-white/7 max-[900px]:border-l-0 max-[900px]:border-t max-[900px]:border-white/7">
             <div>
-              <div className="proj-num">02 / FEATURED</div>
-              <div className="proj-tag">Product Design &amp; Prototyping</div>
-              <h3 className="proj-title">
-                Apple Pencil Retention Device — E-Waste Reduction
-              </h3>
-              <p className="proj-summary">
-                Identified a real problem in a school IT department and
-                delivered a full engineering design cycle — from user
-                interviews through 4+ prototype iterations to a validated,
-                client-approved product.
+              <div className="font-mono text-[11px] text-muted tracking-[0.2em] mb-2">02 / FEATURED</div>
+              <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-3 py-1 tracking-[0.15em] uppercase mb-5">Product Design &amp; Prototyping</div>
+              <h3 className="text-[1.55rem] font-extrabold tracking-[-0.02em] leading-[1.15] text-accent mb-4">Apple Pencil Retention Device — E-Waste Reduction</h3>
+              <p className="text-[0.87rem] text-muted leading-[1.7] mb-4">
+                Identified a real problem in a school IT department and delivered a full engineering design cycle — from user interviews through 4+ prototype iterations to a validated, client-approved product.
               </p>
-              <ul className="proj-bullets">
-                <li>
-                  Interviewed school IT director who reported 8 lost/damaged
-                  peripherals per year (~€120 each); defined 16-point design
-                  specification covering child safety, ergonomics, and material
-                  toxicity
-                </li>
-                <li>
-                  Designed 6 competing concepts in Fusion 360 and selected
-                  optimal design through scoring and client feedback
-                </li>
-                <li>
-                  Prototyped in cardboard then PLA — passed 10N magnetic pull
-                  test and survived 20 drops from 1.5m
-                </li>
-                <li>
-                  Final product: €0.86 in filament, 26.72g, non-toxic PLA, no
-                  sharp edges, no choking hazards
-                </li>
+              <ul className="proj-bullets list-none flex flex-col gap-2 mb-4">
+                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Interviewed school IT director who reported 8 lost/damaged peripherals per year (~€120 each); defined 16-point design specification covering child safety, ergonomics, and material toxicity</li>
+                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Designed 6 competing concepts in Fusion 360 and selected optimal design through scoring and client feedback</li>
+                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Prototyped in cardboard then PLA — passed 10N magnetic pull test and survived 20 drops from 1.5m</li>
+                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Final product: €0.86 in filament, 26.72g, non-toxic PLA, no sharp edges, no choking hazards</li>
               </ul>
             </div>
-            <div className="proj-bottom">
-              <div className="proj-metrics">
-                <div className="proj-metric">
-                  <div className="proj-metric-val">€0.86</div>
-                  <div className="proj-metric-label">Unit Cost</div>
-                </div>
-                <div className="proj-metric">
-                  <div className="proj-metric-val">10N</div>
-                  <div className="proj-metric-label">Pull Test ✓</div>
-                </div>
-                <div className="proj-metric">
-                  <div className="proj-metric-val">20</div>
-                  <div className="proj-metric-label">Drop Tests ✓</div>
-                </div>
+            <div className="flex items-end justify-between gap-4 pt-4 border-t border-white/7">
+              <div className="flex gap-5 flex-wrap">
+                {[{ val: "€0.86", label: "Unit Cost" }, { val: "10N", label: "Pull Test ✓" }, { val: "20", label: "Drop Tests ✓" }].map(({ val, label }) => (
+                  <div key={label} className="flex flex-col">
+                    <span className="font-mono text-[1rem] font-bold text-red">{val}</span>
+                    <span className="font-mono text-[10px] text-muted tracking-[0.1em] uppercase mt-0.5">{label}</span>
+                  </div>
+                ))}
               </div>
-              <img
-                src="/images/asset-07.png"
-                alt="Apple Pencil project QR code"
-                className="proj-qr"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/asset-07.png" alt="Apple Pencil project QR code" className="w-[72px] h-[72px] object-contain flex-shrink-0 invert bg-black p-1" />
+            </div>
+          </div>
+        </div>
+
+        {/* ── Project 03 — RC Aircraft (5 images, mixed orientations) ──── */}
+        <div className="border border-white/7 mb-6 transition-colors duration-300 hover:border-red/28">
+          <Carousel
+            images={[
+              { src: "/images/asset-11.jpg", alt: "Completed Eclipson Wolf" },
+              { src: "/images/asset-12.jpg", alt: "Aircraft assembly" },
+              { src: "/images/asset-13.jpg", alt: "Fuselage assembly" },
+              { src: "/images/asset-14.jpg", alt: "Wing section" },
+              { src: "/images/asset-15.jpg", alt: "Carbon prop and motor" },
+            ]}
+            containerClass="aspect-[4/3]"
+            fit="contain"
+          />
+          <div className="p-8 px-10">
+            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">03</div>
+            <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">Avionics / Systems</div>
+            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">RC Fixed-Wing Aircraft Build — Eclipson G1 Wolf</h3>
+            <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
+              End-to-end build of a 3D-printed fixed-wing RC aircraft. Printed all structural components on a Bambu X1 Carbon, integrated a full avionics stack (brushless motor, ESC, servos, FlySky receiver, LiPo), and ran full systems checks prior to flight. Performed FEA on structural brackets and sourced a carbon-fiber Aeronaut CAM prop.
+            </p>
+            <div className="flex gap-2.5 flex-wrap">
+              {["Bambu X1 Carbon printed", "Full avionics integration", "Carbon-fiber prop", "FEA structural analysis", "FlySky FS-iA10B"].map((s) => (
+                <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Project 04 — Engine Rebuild (3 portrait images) ──────────── */}
+        <div className="border border-white/7 mb-6 transition-colors duration-300 hover:border-red/28">
+          <Carousel
+            images={[
+              { src: "/images/asset-16.jpg", alt: "100cc go-kart engine" },
+              { src: "/images/asset-17.jpg", alt: "Engine disassembly" },
+              { src: "/images/asset-18.jpg", alt: "Engine cylinder head" },
+            ]}
+            containerClass="aspect-[3/4]"
+            fit="contain"
+          />
+          <div className="p-8 px-10">
+            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">04</div>
+            <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">Mechanical Systems</div>
+            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">100cc Go-Kart Engine — Full Disassembly &amp; Rebuild</h3>
+            <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
+              Fully disassembled and rebuilt a 100cc single-cylinder go-kart engine. Removed cylinder head, inspected piston, rings, and bearings, cleaned all components, and reassembled to running condition. Developed hands-on understanding of combustion engine internals, tolerances, and mechanical assembly sequencing.
+            </p>
+            <div className="flex gap-2.5 flex-wrap">
+              {["Full teardown & rebuild", "Piston / ring inspection", "NGK spark plug system", "Engine back to running"].map((s) => (
+                <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Projects 05 & 06 — minor cards (single portrait images) ──── */}
+        <div className="grid grid-cols-2 max-[900px]:grid-cols-1 gap-px bg-white/7 mb-px">
+          {[
+            {
+              src: "/images/asset-19.jpg", alt: "Raptor engine model",
+              num: "05", tag: "3D Printing / Modeling",
+              title: "SpaceX Raptor Engine — 3D Printed Scale Model",
+              desc: "Sourced and printed a detailed multi-part scale model of the SpaceX Raptor engine. Multi-material print in black and white PLA capturing turbopumps, plumbing, and bell geometry. Driven by interest in full-flow staged combustion propulsion.",
+              stats: ["Multi-material PLA", "Full-flow cycle reference"],
+            },
+            {
+              src: "/images/asset-20.jpg", alt: "Lego RC car build",
+              num: "06", tag: "Avionics Prototype",
+              title: "Lego RC Car — Avionics Prototyping Platform",
+              desc: "Built a functional RC car from a Lego Technic chassis to prototype and validate the aircraft avionics stack before installation — ESC, 2200mAh LiPo, steering servo, and FlySky FS-iA10B receiver, fully working under radio control.",
+              stats: ["FlySky FS-iA10B", "2200mAh LiPo", "Functional steering"],
+            },
+          ].map(({ src, alt, num, tag, title, desc, stats }) => (
+            <div key={num} className="bg-bg hover:bg-bg2 transition-colors duration-200">
+              <Carousel
+                images={[{ src, alt }]}
+                containerClass="aspect-[3/4]"
+                fit="contain"
               />
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="project-secondary"
-          style={{
-            marginTop: "-1.5rem",
-            marginBottom: "2rem",
-            borderTop: "none",
-          }}
-        >
-          <div
-            className="proj-photo-strip"
-            style={{ gridTemplateColumns: "1fr 1fr 1fr" }}
-          >
-            <img
-              src="/images/asset-08.png"
-              alt="Exploded CAD diagram"
-              style={stripContain}
-            />
-            <img
-              src="/images/asset-09.png"
-              alt="Design iteration sheet"
-              style={stripContain}
-            />
-            <img
-              src="/images/asset-10.png"
-              alt="Drop test second angle"
-              style={stripCover}
-            />
-          </div>
-        </div>
-
-        <div className="project-secondary">
-          <div
-            className="proj-photo-strip"
-            style={{ gridTemplateColumns: "repeat(5, 1fr)" }}
-          >
-            <img
-              src="/images/asset-11.jpg"
-              alt="Completed Eclipson Wolf"
-              style={stripCover}
-            />
-            <img
-              src="/images/asset-12.jpg"
-              alt="Aircraft assembly"
-              style={stripCover}
-            />
-            <img
-              src="/images/asset-13.jpg"
-              alt="Fuselage assembly"
-              style={stripCover}
-            />
-            <img
-              src="/images/asset-14.jpg"
-              alt="Wing section"
-              style={stripCover}
-            />
-            <img
-              src="/images/asset-15.jpg"
-              alt="Carbon prop and motor"
-              style={stripCover}
-            />
-          </div>
-          <div className="project-secondary-content">
-            <div className="card-num">03</div>
-            <div className="card-tag">Avionics / Systems</div>
-            <h3 className="card-title">
-              RC Fixed-Wing Aircraft Build — Eclipson G1 Wolf
-            </h3>
-            <p className="card-desc">
-              End-to-end build of a 3D-printed fixed-wing RC aircraft. Printed
-              all structural components on a Bambu X1 Carbon, integrated a full
-              avionics stack (brushless motor, ESC, servos, FlySky receiver,
-              LiPo), and ran full systems checks prior to flight. Performed FEA
-              on structural brackets and sourced a carbon-fiber Aeronaut CAM
-              prop.
-            </p>
-            <div className="card-stats">
-              <span className="card-stat">Bambu X1 Carbon printed</span>
-              <span className="card-stat">Full avionics integration</span>
-              <span className="card-stat">Carbon-fiber prop</span>
-              <span className="card-stat">FEA structural analysis</span>
-              <span className="card-stat">FlySky FS-iA10B</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="project-secondary">
-          <div
-            className="proj-photo-strip"
-            style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
-          >
-            <img
-              src="/images/asset-16.jpg"
-              alt="100cc go-kart engine"
-              style={stripCover}
-            />
-            <img
-              src="/images/asset-17.jpg"
-              alt="Engine disassembly"
-              style={stripCover}
-            />
-            <img
-              src="/images/asset-18.jpg"
-              alt="Engine cylinder head"
-              style={stripCover}
-            />
-          </div>
-          <div className="project-secondary-content">
-            <div className="card-num">04</div>
-            <div className="card-tag">Mechanical Systems</div>
-            <h3 className="card-title">
-              100cc Go-Kart Engine — Full Disassembly &amp; Rebuild
-            </h3>
-            <p className="card-desc">
-              Fully disassembled and rebuilt a 100cc single-cylinder go-kart
-              engine. Removed cylinder head, inspected piston, rings, and
-              bearings, cleaned all components, and reassembled to running
-              condition. Developed hands-on understanding of combustion engine
-              internals, tolerances, and mechanical assembly sequencing.
-            </p>
-            <div className="card-stats">
-              <span className="card-stat">Full teardown &amp; rebuild</span>
-              <span className="card-stat">Piston / ring inspection</span>
-              <span className="card-stat">NGK spark plug system</span>
-              <span className="card-stat">Engine back to running</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="projects-minor">
-          <div className="project-card">
-            <img
-              src="/images/asset-19.jpg"
-              alt="Raptor engine model"
-              style={cardImg}
-            />
-            <div className="proj-card-body">
-              <div className="card-num">05</div>
-              <div className="card-tag">3D Printing / Modeling</div>
-              <h3 className="card-title">
-                SpaceX Raptor Engine — 3D Printed Scale Model
-              </h3>
-              <p className="card-desc">
-                Sourced and printed a detailed multi-part scale model of the
-                SpaceX Raptor engine. Multi-material print in black and white PLA
-                capturing turbopumps, plumbing, and bell geometry. Driven by
-                interest in full-flow staged combustion propulsion.
-              </p>
-              <div className="card-stats">
-                <span className="card-stat">Multi-material PLA</span>
-                <span className="card-stat">Full-flow cycle reference</span>
+              <div className="p-6">
+                <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">{num}</div>
+                <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">{tag}</div>
+                <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">{title}</h3>
+                <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">{desc}</p>
+                <div className="flex gap-2.5 flex-wrap">
+                  {stats.map((s) => (
+                    <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="project-card">
-            <img
-              src="/images/asset-20.jpg"
-              alt="Lego RC car build"
-              style={cardImg}
-            />
-            <div className="proj-card-body">
-              <div className="card-num">06</div>
-              <div className="card-tag">Avionics Prototype</div>
-              <h3 className="card-title">
-                Lego RC Car — Avionics Prototyping Platform
-              </h3>
-              <p className="card-desc">
-                Built a functional RC car from a Lego Technic chassis to
-                prototype and validate the aircraft avionics stack before
-                installation — ESC, 2200mAh LiPo, steering servo, and FlySky
-                FS-iA10B receiver, fully working under radio control.
-              </p>
-              <div className="card-stats">
-                <span className="card-stat">FlySky FS-iA10B</span>
-                <span className="card-stat">2200mAh LiPo</span>
-                <span className="card-stat">Functional steering</span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
 
-        <div
-          className="project-secondary"
-          style={{ marginTop: "1px" }}
-        >
-          <div
-            className="proj-photo-strip"
-            style={{ gridTemplateColumns: "1fr 1fr" }}
-          >
-            <img
-              src="/images/asset-21.jpg"
-              alt="Cooking sugar fuel mixture"
-              style={stripTall}
-            />
-            <img
-              src="/images/asset-22.jpg"
-              alt="Nozzle ignition test on grill"
-              style={stripTall}
-            />
-          </div>
-          <div className="project-secondary-content">
-            <div className="card-num">07</div>
-            <div className="card-tag">Propulsion / Chemistry</div>
-            <h3 className="card-title">
-              Solid Rocket Propellant — Sugar Fuel Synthesis &amp; Ignition Test
-            </h3>
-            <p className="card-desc">
-              Researched and synthesized a solid rocket propellant (potassium
-              nitrate / sugar caramel mixture). Fabricated a simple nozzle
-              casing and conducted a controlled ignition test. Built hands-on
-              understanding of oxidizer-fuel ratios, burn characteristics, and
-              energetic material handling. Video documentation of ignition
-              available on request.
+        {/* ── Project 07 — Rocket Propellant (portrait + landscape) ──────
+            asset-21: 1500×2000 PORTRAIT, asset-22: 480×360 LANDSCAPE        */}
+        <div className="border border-white/7 border-t-0 mb-6 transition-colors duration-300 hover:border-red/28">
+          <Carousel
+            images={[
+              { src: "/images/asset-21.jpg", alt: "Cooking sugar fuel mixture" },
+              { src: "/images/asset-22.jpg", alt: "Nozzle ignition test on grill" },
+            ]}
+            containerClass="aspect-[4/3]"
+            fit="contain"
+          />
+          <div className="p-8 px-10">
+            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">07</div>
+            <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">Propulsion / Chemistry</div>
+            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">Solid Rocket Propellant — Sugar Fuel Synthesis &amp; Ignition Test</h3>
+            <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
+              Researched and synthesized a solid rocket propellant (potassium nitrate / sugar caramel mixture). Fabricated a simple nozzle casing and conducted a controlled ignition test. Built hands-on understanding of oxidizer-fuel ratios, burn characteristics, and energetic material handling. Video documentation of ignition available on request.
             </p>
-            <div className="card-stats">
-              <span className="card-stat">KNO₃ / sugar mixture</span>
-              <span className="card-stat">Custom nozzle casing</span>
-              <span className="card-stat">Ignition tested</span>
-              <span className="card-stat">Burn rate observed</span>
+            <div className="flex gap-2.5 flex-wrap">
+              {["KNO₃ / sugar mixture", "Custom nozzle casing", "Ignition tested", "Burn rate observed"].map((s) => (
+                <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="divider" />
+      {/* DIVIDER */}
+      <div className="h-px bg-white/7 mx-12 max-[900px]:mx-6" />
 
-      <div className="section-wrap" id="skills">
-        <div className="section-label">Capabilities</div>
-        <h2 className="section-title">Skills &amp; Tools</h2>
-        <div className="skills-grid">
-          <div className="skill-block">
-            <div className="skill-block-title">{`// CAD & Simulation`}</div>
-            <ul className="skill-list">
-              <li>Fusion 360 (parametric modeling)</li>
-              <li>FEA structural analysis</li>
-              <li>CFD (familiarization)</li>
-              <li>NACA airfoil design</li>
-              <li>Assembly &amp; tolerance design</li>
-            </ul>
-          </div>
-          <div className="skill-block">
-            <div className="skill-block-title">{`// Manufacturing`}</div>
-            <ul className="skill-list">
-              <li>FDM 3D printing (Bambu X1 Carbon)</li>
-              <li>Multi-material PLA printing</li>
-              <li>Gas engine disassembly &amp; rebuild</li>
-              <li>Mechanical assembly</li>
-              <li>Rapid prototyping</li>
-            </ul>
-          </div>
-          <div className="skill-block">
-            <div className="skill-block-title">{`// Engineering Practice`}</div>
-            <ul className="skill-list">
-              <li>Experimental design &amp; testing</li>
-              <li>Data collection &amp; analysis (1K+ pts)</li>
-              <li>Avionics integration (ESC / servo / Rx)</li>
-              <li>Design spec scoring (16-point matrix)</li>
-              <li>Technical documentation</li>
-            </ul>
-          </div>
+      {/* SKILLS */}
+      <div className="px-12 max-[900px]:px-6 py-24 max-w-[1200px] mx-auto" id="skills">
+        <div className="section-label font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-3 flex items-center gap-3">Capabilities</div>
+        <h2 className="font-extrabold tracking-[-0.03em] leading-[1.05] mb-12 text-accent" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
+          Skills &amp; Tools
+        </h2>
+        <div className="grid grid-cols-3 max-[900px]:grid-cols-1 gap-px bg-white/7">
+          {[
+            { title: "// CAD & Simulation", items: ["Fusion 360 (parametric modeling)", "FEA structural analysis", "CFD (familiarization)", "NACA airfoil design", "Assembly & tolerance design"] },
+            { title: "// Manufacturing", items: ["FDM 3D printing (Bambu X1 Carbon)", "Multi-material PLA printing", "Gas engine disassembly & rebuild", "Mechanical assembly", "Rapid prototyping"] },
+            { title: "// Engineering Practice", items: ["Experimental design & testing", "Data collection & analysis (1K+ pts)", "Avionics integration (ESC / servo / Rx)", "Design spec scoring (16-point matrix)", "Technical documentation"] },
+          ].map(({ title, items }) => (
+            <div key={title} className="bg-bg p-8">
+              <div className="font-mono text-[11px] text-red tracking-[0.15em] uppercase mb-5">{title}</div>
+              <ul className="skill-list list-none flex flex-col gap-2.5">
+                {items.map((item) => (
+                  <li key={item} className="text-[0.9rem] text-muted flex items-center gap-2.5">{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="divider" />
+      {/* DIVIDER */}
+      <div className="h-px bg-white/7 mx-12 max-[900px]:mx-6" />
 
-      <div className="section-wrap" id="about">
-        <div className="section-label">Background</div>
-        <h2 className="section-title">About Me</h2>
-        <div className="about-grid">
-          <div className="about-text">
-            <p>
+      {/* ABOUT */}
+      <div className="px-12 max-[900px]:px-6 py-24 max-w-[1200px] mx-auto" id="about">
+        <div className="section-label font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-3 flex items-center gap-3">Background</div>
+        <h2 className="font-extrabold tracking-[-0.03em] leading-[1.05] mb-12 text-accent" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
+          About Me
+        </h2>
+        <div className="max-w-[640px]">
+          <div className="text-[1rem] text-muted leading-[1.8]">
+            <p className="mb-5">
               I&apos;m a{" "}
-              <strong>
-                freshman mechanical engineering student at Santa Clara University
-              </strong>
-              , building a track record of hands-on technical projects before my
-              first internship. My work spans aerodynamics research, avionics
-              integration, engine rebuilds, product design, and propulsion
-              chemistry.
+              <strong className="text-primary font-semibold">freshman mechanical engineering student at Santa Clara University</strong>
+              , building a track record of hands-on technical projects before my first internship. My work spans aerodynamics research, avionics integration, engine rebuilds, product design, and propulsion chemistry.
             </p>
-            <p>
+            <p className="mb-5">
               I&apos;m drawn to engineering problems where{" "}
-              <strong>physics meets hardware</strong> — where you can&apos;t just
-              simulate your way to an answer and have to build, test, and
-              iterate. That instinct led me to build a wind tunnel from scratch,
-              fly a 3D-printed aircraft, and tear down a 100cc engine.
+              <strong className="text-primary font-semibold">physics meets hardware</strong> — where you can&apos;t just simulate your way to an answer and have to build, test, and iterate. That instinct led me to build a wind tunnel from scratch, fly a 3D-printed aircraft, and tear down a 100cc engine.
             </p>
             <p>
-              I&apos;m targeting <strong>summer 2026 internships</strong> in
-              aerospace propulsion, vehicle dynamics, structures, or systems
-              integration at companies pushing the frontier of flight and
-              electrification.
+              I&apos;m targeting{" "}
+              <strong className="text-primary font-semibold">summer 2026 internships</strong> in aerospace propulsion, vehicle dynamics, structures, or systems integration at companies pushing the frontier of flight and electrification.
             </p>
           </div>
+        </div>
+      </div>
+
+      {/* CONTACT */}
+      <div className="bg-bg2 border-t border-white/7" id="contact">
+        <div className="max-w-[1200px] mx-auto px-12 max-[900px]:px-6 py-20 flex justify-between items-center gap-12 flex-wrap max-[900px]:flex-col">
           <div>
-            <div className="section-label" style={{ marginBottom: "1rem" }}>
-              Target Companies
+            <div className="section-label font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-3 flex items-center gap-3">Available Summer 2026</div>
+            <div className="font-extrabold tracking-[-0.03em] text-accent leading-[1.1]" style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)" }}>
+              Let&apos;s build<br />something fast.
             </div>
-            <div className="target-companies">
-              <div className="company-item">
-                <div className="company-dot" />
-                <span className="company-name">SpaceX</span>
-                <span className="company-sector">Launch / Propulsion</span>
-              </div>
-              <div className="company-item">
-                <div className="company-dot" />
-                <span className="company-name">Hermeus</span>
-                <span className="company-sector">Hypersonic Flight</span>
-              </div>
-              <div className="company-item">
-                <div className="company-dot" />
-                <span className="company-name">Anduril Industries</span>
-                <span className="company-sector">Defense Tech</span>
-              </div>
-              <div className="company-item">
-                <div className="company-dot" />
-                <span className="company-name">JPL / NASA</span>
-                <span className="company-sector">Deep Space Systems</span>
-              </div>
-              <div className="company-item">
-                <div className="company-dot" />
-                <span className="company-name">Tesla</span>
-                <span className="company-sector">EV / Powertrain</span>
-              </div>
-              <div className="company-item">
-                <div className="company-dot" />
-                <span className="company-name">Lucid Motors</span>
-                <span className="company-sector">EV / Structures</span>
-              </div>
-            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            {[
+              { href: "mailto:jtrotzenberg@scu.edu", icon: "@", label: "jtrotzenberg@scu.edu" },
+              { href: "tel:5622097315", icon: "✆", label: "(562) 209-7315" },
+              { href: "https://linkedin.com/in/julian-trotzenberg-b5a53b2a8", icon: "in", label: "linkedin.com/in/julian-trotzenberg", external: true },
+            ].map(({ href, icon, label, external }) => (
+              <a key={href} href={href} className="flex items-center gap-4 font-mono text-[13px] text-muted no-underline hover:text-red transition-colors duration-200"
+                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+                <div className="w-9 h-9 border border-white/7 flex items-center justify-center text-[14px] flex-shrink-0">{icon}</div>
+                {label}
+              </a>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="contact-section" id="contact">
-        <div className="contact-inner">
-          <div>
-            <div
-              className="section-label"
-              style={{ marginBottom: "0.75rem" }}
-            >
-              Available Summer 2026
-            </div>
-            <div className="contact-headline">
-              Let&apos;s build
-              <br />
-              something fast.
-            </div>
-          </div>
-          <div className="contact-links">
-            <a href="mailto:jtrotzenberg@scu.edu" className="contact-link">
-              <div className="contact-link-icon">@</div>
-              jtrotzenberg@scu.edu
-            </a>
-            <a href="tel:5622097315" className="contact-link">
-              <div className="contact-link-icon">✆</div>
-              (562) 209-7315
-            </a>
-            <a
-              href="https://linkedin.com/in/julian-trotzenberg-b5a53b2a8"
-              className="contact-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className="contact-link-icon">in</div>
-              linkedin.com/in/julian-trotzenberg
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <footer>
-        <span>© 2026 Julian Trotzenberg</span>
-        <span>
-          Mechanical Engineering · Santa Clara University · Class of 2029
-        </span>
+      {/* FOOTER */}
+      <footer className="border-t border-white/7 px-12 max-[900px]:px-6 py-6 flex justify-between items-center max-[900px]:flex-col max-[900px]:gap-2 max-[900px]:text-center">
+        <span className="font-mono text-[11px] text-muted tracking-[0.1em]">© 2026 Julian Trotzenberg</span>
+        <span className="font-mono text-[11px] text-muted tracking-[0.1em]">Mechanical Engineering · Santa Clara University · Class of 2029</span>
       </footer>
     </>
   );

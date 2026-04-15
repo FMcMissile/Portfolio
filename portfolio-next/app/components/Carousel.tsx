@@ -1,0 +1,98 @@
+"use client";
+import { useState, useCallback } from "react";
+
+interface CarouselImage {
+  src: string;
+  alt: string;
+}
+
+interface CarouselProps {
+  images: CarouselImage[];
+  /** Tailwind class controlling the container size, e.g. "aspect-[4/3]" */
+  containerClass?: string;
+  /** object-contain keeps full image visible; object-cover fills the frame */
+  fit?: "contain" | "cover";
+}
+
+export default function Carousel({
+  images,
+  containerClass = "aspect-[4/3]",
+  fit = "contain",
+}: CarouselProps) {
+  const [current, setCurrent] = useState(0);
+
+  const prev = useCallback(
+    () => setCurrent((c) => (c - 1 + images.length) % images.length),
+    [images.length]
+  );
+  const next = useCallback(
+    () => setCurrent((c) => (c + 1) % images.length),
+    [images.length]
+  );
+
+  const single = images.length === 1;
+
+  return (
+    <div className={`relative w-full overflow-hidden bg-black ${containerClass}`}>
+      {/* Slide track */}
+      <div
+        className="flex h-full transition-transform duration-500 ease-in-out will-change-transform"
+        style={{ transform: `translateX(-${current * 100}%)` }}
+      >
+        {images.map(({ src, alt }) => (
+          <div key={src} className="relative w-full h-full flex-shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt={alt}
+              className={`w-full h-full ${fit === "contain" ? "object-contain" : "object-cover"} block brightness-[0.88] hover:brightness-100 transition-[filter] duration-300`}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Prev / Next — hidden when single image */}
+      {!single && (
+        <>
+          <button
+            onClick={prev}
+            aria-label="Previous image"
+            className="absolute left-0 top-0 h-full px-3 flex items-center text-white/60 hover:text-white bg-gradient-to-r from-black/40 to-transparent transition-colors duration-200 cursor-pointer"
+          >
+            <span className="font-mono text-[18px] leading-none select-none">←</span>
+          </button>
+          <button
+            onClick={next}
+            aria-label="Next image"
+            className="absolute right-0 top-0 h-full px-3 flex items-center text-white/60 hover:text-white bg-gradient-to-l from-black/40 to-transparent transition-colors duration-200 cursor-pointer"
+          >
+            <span className="font-mono text-[18px] leading-none select-none">→</span>
+          </button>
+        </>
+      )}
+
+      {/* Dot indicators */}
+      {!single && (
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              aria-label={`Go to image ${i + 1}`}
+              className={`w-1.5 h-1.5 transition-all duration-200 cursor-pointer ${
+                i === current ? "bg-red scale-125" : "bg-white/40 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Counter */}
+      {!single && (
+        <div className="absolute top-3 right-3 font-mono text-[10px] text-white/50 tracking-[0.15em] bg-black/40 px-2 py-0.5">
+          {current + 1} / {images.length}
+        </div>
+      )}
+    </div>
+  );
+}
