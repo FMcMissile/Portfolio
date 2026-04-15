@@ -35,7 +35,7 @@ export default function Home() {
         {/* dark gradient overlay so text stays readable */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(to right, rgba(238,244,247,0.72) 30%, rgba(238,244,247,0.15) 100%)" }}
+          style={{ background: "linear-gradient(to right, rgba(238,244,247,0.55) 20%, rgba(238,244,247,0.05) 60%)" }}
           aria-hidden
         />
         <div
