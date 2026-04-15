@@ -35,7 +35,7 @@ export default function Home() {
         {/* dark gradient overlay so text stays readable */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(to right, rgba(238,244,247,0.55) 20%, rgba(238,244,247,0.05) 60%)" }}
+          style={{ background: "linear-gradient(to right, rgba(238,244,247,0.88) 40%, rgba(238,244,247,0.2) 75%)" }}
           aria-hidden
         />
         <div
@@ -55,7 +55,7 @@ export default function Home() {
         <h1 className="font-extrabold leading-[0.95] tracking-[-0.03em] mb-6 text-accent relative" style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
           Julian<span className="text-red block">Trotzenberg</span>
         </h1>
-        <p className="text-[1.1rem] text-muted max-w-[540px] mb-12 leading-[1.7] relative">
+        <p className="text-[1.1rem] text-primary max-w-[540px] mb-12 leading-[1.7] relative">
           Mechanical engineering student building{" "}
           <strong className="text-primary font-semibold">real hardware</strong> — from custom wind
           tunnels and aerodynamics experiments to 3D-printed flight systems. Targeting roles in{" "}
@@ -249,32 +249,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── Project 04 — Engine Rebuild (3 portrait images) ──────────── */}
-        <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
-          <Carousel
-            images={[
-              { src: "/images/engine-complete.jpg", alt: "100cc go-kart engine" },
-              { src: "/images/engine-gokart-chassis.jpg", alt: "Go-kart chassis" },
-              { src: "/images/engine-disassembly.jpg", alt: "Engine disassembly" },
-              { src: "/images/engine-cylinder.jpg", alt: "Engine cylinder head" },
-            ]}
-            containerClass="aspect-[3/4]"
-            fit="contain"
-          />
-          <div className="p-8 px-10">
-            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">04</div>
-            <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">Mechanical Systems</div>
-            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">100cc Go-Kart Engine — Full Disassembly &amp; Rebuild</h3>
-            <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
-              Fully disassembled and rebuilt a 100cc single-cylinder go-kart engine. Removed cylinder head, inspected piston, rings, and bearings, cleaned all components, and reassembled to running condition. Developed hands-on understanding of combustion engine internals, tolerances, and mechanical assembly sequencing.
-            </p>
-            <div className="flex gap-2.5 flex-wrap">
-              {["Full teardown & rebuild", "Piston / ring inspection", "NGK spark plug system", "Engine back to running"].map((s) => (
-                <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* ── Project 05 — Raptor Model ──── */}
         <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
