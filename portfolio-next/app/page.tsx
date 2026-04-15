@@ -30,7 +30,7 @@ export default function Home() {
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
-          style={{ opacity: 0.92 }}
+          style={{ opacity: 0.92, transform: "scaleX(-1)" }}
         />
         {/* dark gradient overlay so text stays readable */}
         <div
