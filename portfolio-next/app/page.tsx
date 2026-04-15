@@ -22,7 +22,7 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <div className="min-h-screen flex flex-col justify-center px-12 max-[900px]:px-6 relative overflow-hidden">
+      <div className="min-h-screen flex flex-col justify-center pt-28 px-12 max-[900px]:px-6 relative overflow-hidden">
         {/* FSAE photo background */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -49,7 +49,7 @@ export default function Home() {
           }}
           aria-hidden
         />
-        <div className="hero-tag font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-6 flex items-center gap-3 relative">
+        <div className="hero-tag font-mono text-[13px] text-accent tracking-[0.2em] uppercase mb-6 flex items-center gap-3 relative font-bold">
           Freshman · Santa Clara University · Class of 2029
         </div>
         <h1 className="font-extrabold leading-[0.95] tracking-[-0.03em] mb-6 text-accent relative" style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
