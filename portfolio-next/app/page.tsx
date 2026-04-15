@@ -22,6 +22,21 @@ export default function Home() {
 
       {/* HERO */}
       <div className="min-h-screen flex flex-col justify-center px-12 max-[900px]:px-6 relative overflow-hidden">
+        {/* FSAE photo background */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/fsae-bg.jpg"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+          style={{ opacity: 0.75 }}
+        />
+        {/* dark gradient overlay so text stays readable */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(to right, rgba(8,10,14,0.55) 35%, rgba(8,10,14,0.15) 100%)" }}
+          aria-hidden
+        />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -54,14 +69,7 @@ export default function Home() {
             Get in Touch
           </a>
         </div>
-        <div className="absolute right-16 top-1/2 -translate-y-1/2 flex flex-col gap-8 max-[900px]:hidden">
-          {[{ num: "1K+", label: "Data Points" }, { num: "7", label: "Airfoils Built" }, { num: "6", label: "Projects" }].map(({ num, label }) => (
-            <div key={label} className="text-right border-r border-red/28 pr-6">
-              <div className="font-mono text-[2rem] font-bold text-red leading-none">{num}</div>
-              <div className="font-mono text-[10px] text-muted tracking-[0.15em] uppercase mt-1">{label}</div>
-            </div>
-          ))}
-        </div>
+
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 font-mono text-[10px] text-muted tracking-[0.15em] uppercase">
           <span>Scroll</span>
           <div className="w-px h-10 bg-gradient-to-b from-red to-transparent animate-scroll-pulse" />

@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: "Julian Trotzenberg — Mechanical Engineer",
   description:
     "Mechanical engineering student at Santa Clara University — aerodynamics, avionics, prototyping, and propulsion projects.",
+  icons: {
+    icon: "/images/JT-Logo.svg",
+  },
 };
 
 export default function RootLayout({
