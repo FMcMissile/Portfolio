@@ -26,7 +26,7 @@ export default function Home() {
         {/* FSAE photo background */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/fsae-bg.jpg"
+          src="/images/Julian 2025-26 FSAE Car.jpg"
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
@@ -262,6 +262,39 @@ export default function Home() {
         </div>
 
 
+        {/* ── Project 04 — CNC Machining / AMD ──── */}
+        <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
+          <Carousel
+            images={[
+              { src: "/images/amd-cnc-part.heic", alt: "CNC-machined AMD x AKPsi aluminum block" },
+              { src: "/images/amd-cnc-car.heic", alt: "Sitting in FSAE car at AMD event" },
+            ]}
+            containerClass="aspect-[4/3]"
+            fit="contain"
+          />
+          <div className="border-t border-black/8 bg-bg2 grid grid-cols-2 max-[700px]:grid-cols-1">
+            <video autoPlay muted loop playsInline controls className="w-full max-h-[340px] object-contain border-r border-black/8 max-[700px]:border-r-0 max-[700px]:border-b">
+              <source src="/images/amd-cnc-video1.mov" type="video/mp4" />
+            </video>
+            <video autoPlay muted loop playsInline controls className="w-full max-h-[340px] object-contain">
+              <source src="/images/amd-cnc-video2.mov" type="video/mp4" />
+            </video>
+          </div>
+          <div className="p-8 px-10">
+            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">04</div>
+            <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">CNC Machining</div>
+            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">Learning CNC Machining — AMD Campus Visit</h3>
+            <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
+              As Co-STEAM Chair for Alpha Kappa Psi, organized a company visit to AMD — coordinating with an on-site host to bring students inside one of the leading semiconductor companies for facility tours and direct access to engineers. To mark the event, I designed and CNC-machined a custom aluminum piece engraved with the AMD × AKΨ logo, bridging hands-on fabrication with professional development.
+            </p>
+            <div className="flex gap-2.5 flex-wrap">
+              {["CNC Milling", "Aluminum", "Alpha Kappa Psi", "Event Coordination"].map((s) => (
+                <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* ── Project 05 — Raptor Model ──── */}
         <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
           <Carousel
@@ -273,7 +306,7 @@ export default function Home() {
             fit="contain"
           />
           <div className="p-8 px-10">
-            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">05</div>
+            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">06</div>
             <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">3D Printing / Modeling</div>
             <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">SpaceX Raptor Engine — 3D Printed Scale Model</h3>
             <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
