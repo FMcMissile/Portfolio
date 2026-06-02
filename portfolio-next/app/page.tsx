@@ -26,7 +26,7 @@ export default function Home() {
         {/* FSAE photo background */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/Julian 2025-26 FSAE Car.jpg"
+          src="/images/fsae-car-2026.jpg"
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
@@ -266,8 +266,8 @@ export default function Home() {
         <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
           <Carousel
             images={[
-              { src: "/images/amd-cnc-part.heic", alt: "CNC-machined AMD x AKPsi aluminum block" },
-              { src: "/images/amd-cnc-car.heic", alt: "Sitting in FSAE car at AMD event" },
+              { src: "/images/amd-cnc-part.jpg", alt: "CNC-machined AMD x AKPsi aluminum block" },
+              { src: "/images/amd-cnc-car.jpg", alt: "Sitting in FSAE car at AMD event" },
             ]}
             containerClass="aspect-[4/3]"
             fit="contain"
