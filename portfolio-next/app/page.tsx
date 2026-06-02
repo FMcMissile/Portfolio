@@ -26,7 +26,7 @@ export default function Home() {
         {/* FSAE photo background */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/fsae-car-2026.jpg"
+          src="/images/IMG_5975.jpg"
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
