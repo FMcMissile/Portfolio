@@ -368,7 +368,7 @@ export default function Home() {
             <p className="mb-5">
               I&apos;m a{" "}
               <strong className="text-primary font-semibold">freshman mechanical engineering student at Santa Clara University</strong>
-              . I build things.
+              . I like to build things.
             </p>
             <p className="mb-5">
               I&apos;m drawn to engineering problems where{" "}
