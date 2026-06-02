@@ -285,7 +285,7 @@ export default function Home() {
             <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">CNC Machining</div>
             <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">Learning CNC Machining — AMD Campus Visit</h3>
             <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
-              As Co-STEAM Chair for Alpha Kappa Psi, organized a company visit to AMD — coordinating with an on-site host to bring students inside one of the leading semiconductor companies for facility tours and direct access to engineers. To mark the event, I designed and CNC-machined a custom aluminum piece engraved with the AMD × AKΨ logo, bridging hands-on fabrication with professional development.
+              Organized a company visit to AMD as Co-STEAM Chair for Alpha Kappa Psi with an on-site host. To mark the event, I designed and CNC-machined a custom aluminum piece engraved with AMD × AKΨ, bridging hands-on fabrication with professional development.
             </p>
             <div className="flex gap-2.5 flex-wrap">
               {["CNC Milling", "Aluminum", "Alpha Kappa Psi", "Event Coordination"].map((s) => (
