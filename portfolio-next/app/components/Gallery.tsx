@@ -17,19 +17,24 @@ export interface GalleryItem {
 interface GalleryProps {
   items: GalleryItem[];
   dark?: boolean;
+  /** Taller tiles, for short galleries that get room to breathe */
+  tall?: boolean;
 }
 
 /** Apple-style horizontal snap gallery with rounded tiles and paddle controls. */
-export default function Gallery({ items, dark = false }: GalleryProps) {
+export default function Gallery({ items, dark = false, tall = false }: GalleryProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
+  /** true when every tile is visible at once, so the row is centered and paddles are hidden */
+  const [fits, setFits] = useState(false);
 
   const updateEdges = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
     setAtStart(el.scrollLeft <= 8);
     setAtEnd(el.scrollLeft >= el.scrollWidth - el.clientWidth - 8);
+    setFits(el.scrollWidth <= el.clientWidth + 1);
   }, []);
 
   useEffect(() => {
@@ -61,7 +66,9 @@ export default function Gallery({ items, dark = false }: GalleryProps) {
     <div>
       <div
         ref={trackRef}
-        className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto px-[max(1.5rem,calc((100vw-1100px)/2))] scroll-px-[max(1.5rem,calc((100vw-1100px)/2))]"
+        className={`no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto px-[max(1.5rem,calc((100vw-1100px)/2))] scroll-px-[max(1.5rem,calc((100vw-1100px)/2))] ${
+          fits ? "justify-center" : ""
+        }`}
       >
         {items.map((item) => {
           const isVideo = item.type === "video";
@@ -76,7 +83,11 @@ export default function Gallery({ items, dark = false }: GalleryProps) {
             <div
               key={item.src}
               data-slide
-              className={`relative h-[420px] max-[734px]:h-[300px] ${aspect} flex-shrink-0 snap-start overflow-hidden rounded-[1.5rem] ${
+              className={`relative ${
+                tall
+                  ? "h-[640px] max-[900px]:h-[520px] max-[734px]:h-[420px]"
+                  : "h-[420px] max-[734px]:h-[300px]"
+              } ${aspect} flex-shrink-0 snap-start overflow-hidden rounded-[1.5rem] ${
                 item.fit === "contain" ? "bg-paper2" : tileBg
               }`}
             >
@@ -105,7 +116,7 @@ export default function Gallery({ items, dark = false }: GalleryProps) {
         })}
       </div>
 
-      {items.length > 1 && (
+      {items.length > 1 && !fits && (
         <div className="mx-auto mt-5 flex max-w-[1100px] justify-end gap-3 px-6">
           <button
             onClick={() => page(-1)}

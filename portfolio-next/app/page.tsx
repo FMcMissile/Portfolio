@@ -54,7 +54,7 @@ export default function Home() {
             Julian Trotzenberg
           </h1>
           <p className="mb-9 max-w-[560px] text-[1.15rem] leading-[1.55] text-[#e8e8ed]">
-            Wind tunnels, 3D printed parts, machined aluminum. Aiming at aerospace, propulsion,
+            Wind tunnels, 3D printed parts, machined aluminum. Aiming at aerospace, product design,
             and electric vehicles.
           </p>
           <div className="flex flex-wrap gap-4">
@@ -250,7 +250,7 @@ export default function Home() {
       <Chapter
         dark
         eyebrow="Propulsion"
-        title="Desktop Raptor."
+        title="Desktop Raptor Engine."
         intro="A multi-part scale model of the SpaceX Raptor engine, printed in black and white PLA with turbopumps, plumbing, and bell geometry. Driven by an interest in full flow staged combustion."
         highlights={[
           {
@@ -277,9 +277,10 @@ export default function Home() {
           <>
             <Gallery
               dark
+              tall
               items={[
-                { src: "/images/raptor-model.jpg", alt: "SpaceX Raptor engine model", wide: true },
-                { src: "/images/raptor-model-held.jpg", alt: "Raptor model held" },
+                { src: "/images/raptor-model.jpg", alt: "SpaceX Raptor engine model", portrait: true },
+                { src: "/images/raptor-model-held.jpg", alt: "Raptor model held", portrait: true },
               ]}
             />
             <p className="mt-6 text-center text-[13px] text-snow-muted">
@@ -292,7 +293,7 @@ export default function Home() {
       {/* 07 SUGAR FUEL (light) */}
       <Chapter
         eyebrow="Chemistry"
-        title="Sugar fuel. A bit of dangerous fun."
+        title="Sugar fuel."
         intro="A potassium nitrate and sugar caramel propellant, mixed, cast, and ignited in the backyard. A first experiment in oxidizer to fuel ratios and burn behavior."
         highlights={[
           {
@@ -405,7 +406,7 @@ export default function Home() {
               className="mb-8 font-semibold tracking-[-0.02em] text-ink"
               style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.08 }}
             >
-              I like to build things.
+              About me.
             </h2>
             <div className="text-[1.1rem] leading-[1.7] text-ink-muted">
               <p className="mb-5">
