@@ -1,24 +1,17 @@
 import type { Metadata } from "next";
-import { Space_Mono, Syne } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-syne",
-  display: "swap",
-});
-
-const spaceMono = Space_Mono({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-space-mono",
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Julian Trotzenberg — Mechanical Engineer",
+  title: "Julian Trotzenberg | Mechanical Engineer",
   description:
-    "Mechanical engineering student at Santa Clara University — aerodynamics, avionics, prototyping, and propulsion projects.",
+    "Mechanical engineering student at Santa Clara University. Aerodynamics, avionics, prototyping, and propulsion projects.",
   icons: {
     icon: "/favicon.svg",
   },
@@ -31,9 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${syne.variable} ${spaceMono.variable}`}>
-        {children}
-      </body>
+      <body className={inter.variable}>{children}</body>
     </html>
   );
 }

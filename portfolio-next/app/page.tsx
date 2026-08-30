@@ -1,449 +1,472 @@
-import Link from "next/link";
-import Carousel from "./components/Carousel";
+import { existsSync } from "fs";
+import path from "path";
+import Image from "next/image";
+import Nav from "./components/Nav";
+import Reveal from "./components/Reveal";
+import Gallery from "./components/Gallery";
+import Chapter from "./components/Chapter";
+import SplatViewer from "./components/SplatViewer";
+import ModelViewer from "./components/ModelViewer";
+
+const modelsDir = path.join(process.cwd(), "public", "models");
+function findModel(names: string[]): string | null {
+  const hit = names.find((n) => existsSync(path.join(modelsDir, n)));
+  return hit ? `/models/${hit}` : null;
+}
 
 export default function Home() {
+  const raptorSplat = findModel(["raptor.ksplat", "raptor.splat", "raptor.ply"]);
+  const uprightModel = findModel(["upright.glb", "upright.gltf"]);
+
   return (
     <>
-      {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-12 max-[900px]:px-6 py-5 bg-[rgba(255,255,255,0.92)] backdrop-blur-md border-b border-black/8">
-        <Link href="/" className="no-underline flex items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/favicon.svg" alt="JT Logo" className="h-10 w-auto" />
-        </Link>
-        <ul className="flex gap-10 list-none max-[900px]:hidden">
-          {["Projects", "Skills", "About", "Contact"].map((item) => (
-            <li key={item}>
-              <a href={`#${item.toLowerCase()}`} className="font-mono text-[11px] text-muted no-underline tracking-[0.1em] uppercase hover:text-accent transition-colors duration-200">
-                {item}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <Nav />
 
       {/* HERO */}
-      <div className="min-h-screen flex flex-col justify-center pt-28 px-12 max-[900px]:px-6 relative overflow-hidden">
-        {/* FSAE photo background */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+      <header className="relative flex h-[100svh] flex-col justify-end overflow-hidden bg-night">
+        <Image
           src="/images/IMG_5975.jpg"
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          style={{ opacity: 0.92, objectPosition: "45% 20%" }}
-        />
-        {/* dark gradient overlay so text stays readable */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(to right, rgba(238,244,247,0.6) 25%, rgba(238,244,247,0.0) 55%)" }}
-          aria-hidden
+          alt="Julian in the SCU FSAE car"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "45% 20%" }}
         />
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{
-            backgroundImage:
-              "linear-gradient(rgba(91,168,196,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(91,168,196,0.07) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-            maskImage: "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%)",
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 38%, rgba(0,0,0,0.08) 65%)",
           }}
-          aria-hidden
         />
-        <div className="hero-tag font-mono text-[13px] text-accent tracking-[0.2em] uppercase mb-6 flex items-center gap-3 relative font-bold">
-          Freshman · Santa Clara University · Class of 2029
-        </div>
-        <h1 className="font-extrabold leading-[0.95] tracking-[-0.03em] mb-6 text-accent relative" style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
-          Julian<span className="text-red block">Trotzenberg</span>
-        </h1>
-        <p className="text-[1.1rem] text-primary max-w-[540px] mb-12 leading-[1.7] relative">
-          Mechanical engineering student building{" "}
-          <strong className="text-primary font-semibold">real hardware</strong> — from custom wind
-          tunnels and aerodynamics experiments to 3D-printed flight systems. Targeting roles in{" "}
-          <strong className="text-primary font-semibold">aerospace &amp; propulsion</strong> and{" "}
-          <strong className="text-primary font-semibold">electric vehicle</strong> development.
-        </p>
-        <div className="flex gap-4 flex-wrap relative">
-          <a href="#projects" className="inline-flex items-center gap-2 px-8 py-[0.85rem] bg-red text-white font-mono text-[12px] font-bold tracking-[0.1em] uppercase no-underline hover:opacity-85 hover:-translate-y-px transition-all duration-200">
-            View Work ↓
-          </a>
-          <a href="mailto:jtrotzenberg@scu.edu" className="inline-flex items-center gap-2 px-8 py-[0.85rem] bg-transparent text-primary font-mono text-[12px] tracking-[0.1em] uppercase no-underline border border-red/28 hover:border-red hover:text-red transition-all duration-200">
-            Get in Touch
-          </a>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 font-mono text-[10px] text-muted tracking-[0.15em] uppercase">
-          <span>Scroll</span>
-          <div className="w-px h-10 bg-gradient-to-b from-red to-transparent animate-scroll-pulse" />
-        </div>
-      </div>
-
-      {/* SKILLS TICKER */}
-      <div className="bg-bg2 border-t border-b border-black/8 py-6 overflow-hidden">
-        <div className="flex gap-12 animate-ticker whitespace-nowrap">
-          {[
-            "Fusion 360","·","Aerodynamics","·","3D Printing","·","CAD / FEA","·",
-            "Avionics Integration","·","Wind Tunnel Testing","·","Product Design","·",
-            "NACA Airfoils","·","Rapid Prototyping","·","Data Analysis","·",
-            "L/D Optimization","·","Gas Engine Rebuild","·","Flight Systems","·",
-            "Fusion 360","·","Aerodynamics","·","3D Printing","·","CAD / FEA","·",
-            "Avionics Integration","·","Wind Tunnel Testing","·","Product Design","·",
-            "NACA Airfoils","·","Rapid Prototyping","·","Data Analysis","·",
-            "L/D Optimization","·","Gas Engine Rebuild","·","Flight Systems","·",
-          ].map((item, i) => (
-            <span key={i} className={`font-mono text-[12px] tracking-[0.1em] uppercase flex-shrink-0 ${
-              ["Fusion 360","3D Printing","Avionics Integration","Product Design","NACA Airfoils","Data Analysis","Gas Engine Rebuild"].includes(item)
-                ? "text-red" : "text-muted"
-            }`}>
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* PROJECTS */}
-      <div className="px-12 max-[900px]:px-6 py-24 max-w-[1200px] mx-auto" id="projects">
-        <div className="section-label font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-3 flex items-center gap-3">Selected Work</div>
-        <h2 className="font-extrabold tracking-[-0.03em] leading-[1.05] mb-12 text-accent" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
-          Engineering Projects
-        </h2>
-
-        {/* ── Project 01 — Wind Tunnel ── full-width carousel + horizontal text ── */}
-        <div className="mb-8">
-          {/* Edge-to-edge carousel */}
-          <div className="relative w-screen left-1/2 -translate-x-1/2">
-            {/* Left fade */}
-            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none" />
-            {/* Right fade */}
-            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
-            <Carousel
-              images={[
-                { src: "/images/wind-tunnel-setup.jpg", alt: "Full wind tunnel setup" },
-                { src: "/images/wind-tunnel-building.jpg", alt: "Building the wind tunnel" },
-                { src: "/images/wind-tunnel-inlet.jpg", alt: "Straw laminar flow inlet" },
-                { src: "/images/wind-tunnel-airfoils.jpg", alt: "7 NACA 0015 airfoils" },
-              ]}
-              containerClass="aspect-[3/1] max-[900px]:aspect-[4/3]"
-              fit="contain"
-            />
-          </div>
-          {/* Horizontal 3-column text section */}
-          <div className="grid grid-cols-3 max-[900px]:grid-cols-1 border border-black/8 border-t-0 transition-colors duration-300 hover:border-red/28">
-            {/* Col 1: label + title + stats */}
-            <div className="p-8 border-r border-black/8 max-[900px]:border-r-0 max-[900px]:border-b flex flex-col justify-between gap-6">
-              <div>
-                <div className="font-mono text-[11px] text-muted tracking-[0.2em] mb-2">01 / FEATURED</div>
-                <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-3 py-1 tracking-[0.15em] uppercase mb-4">Aerodynamics Research</div>
-                <h3 className="text-[1.4rem] font-extrabold tracking-[-0.02em] leading-[1.15] text-accent">Subsonic Wing Sweep Angle Optimization</h3>
-              </div>
-              <div className="flex gap-5 flex-wrap items-end justify-between">
-                <div className="flex gap-5 flex-wrap">
-                  {[{ val: "1,000+", label: "Data Points" }, { val: "3", label: "Wind Speeds" }, { val: "7", label: "Airfoils" }].map(({ val, label }) => (
-                    <div key={label} className="flex flex-col">
-                      <span className="font-mono text-[1rem] font-bold text-red">{val}</span>
-                      <span className="font-mono text-[10px] text-muted tracking-[0.1em] uppercase mt-0.5">{label}</span>
-                    </div>
-                  ))}
-                </div>
-                <a
-                  href="/Aerodynamics Research Project Julian.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-[11px] text-red tracking-[0.1em] uppercase no-underline border border-red/28 px-3 py-2 hover:bg-red hover:text-white transition-all duration-200 flex-shrink-0"
-                >
-                  View Report →
-                </a>
-              </div>
-            </div>
-            {/* Col 2: description */}
-            <div className="p-8 border-r border-black/8 max-[900px]:border-r-0 max-[900px]:border-b">
-              <p className="text-[0.87rem] text-muted leading-[1.8]">
-                Designed and built a custom wind tunnel from scratch to experimentally determine the optimal wing sweep angle for maximizing lift-to-drag ratio — corroborating variable-sweep logic used in the F-14 Tomcat.
-              </p>
-            </div>
-            {/* Col 3: bullets */}
-            <div className="p-8">
-              <ul className="proj-bullets list-none flex flex-col gap-3">
-                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Designed 7 NACA 0015 airfoils (0°–60° sweep) in Fusion 360, 3D printed to 0.2mm accuracy on Bambu X1 Carbon</li>
-                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Engineered 2 wind tunnel iterations with laminar flow straw filter, pulley-based drag measurement, and rail-mounted force isolation cart</li>
-                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Drag decreases significantly past 30° sweep; lift follows a cos² relationship — supporting variable-sweep aircraft design</li>
-                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Proposed CFD simulation as validated next step to eliminate experimental uncertainty</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* ── Project 02 — PenSafe ── full-width carousel + horizontal text ── */}
-        <div className="mb-8">
-          <div className="relative w-screen left-1/2 -translate-x-1/2">
-            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
-            <Carousel
-              images={[
-                { src: "/images/pencil-device.png", alt: "PenSafe retention device" },
-                { src: "/images/pencil-held.png", alt: "Device held showing mount" },
-                { src: "/images/pencil-cad.png", alt: "Exploded CAD diagram" },
-                { src: "/images/pencil-iterations.png", alt: "Design iteration sheet" },
-              ]}
-              containerClass="aspect-[3/1] max-[900px]:aspect-[4/3]"
-              fit="contain"
-            />
-          </div>
-          <div className="grid grid-cols-3 max-[900px]:grid-cols-1 border border-black/8 border-t-0 transition-colors duration-300 hover:border-red/28">
-            {/* Col 1: label + title + stats */}
-            <div className="p-8 border-r border-black/8 max-[900px]:border-r-0 max-[900px]:border-b flex flex-col justify-between gap-6">
-              <div>
-                <div className="font-mono text-[11px] text-muted tracking-[0.2em] mb-2">02 / FEATURED</div>
-                <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-3 py-1 tracking-[0.15em] uppercase mb-4">Product Design &amp; Prototyping</div>
-                <h3 className="text-[1.4rem] font-extrabold tracking-[-0.02em] leading-[1.15] text-accent">PenSafe — E-Waste Reduction</h3>
-              </div>
-              <div className="flex gap-5 flex-wrap items-end justify-between">
-                <div className="flex gap-5 flex-wrap">
-                  {[{ val: "€0.86", label: "Unit Cost" }, { val: "10N", label: "Pull Test ✓" }, { val: "20", label: "Drop Tests ✓" }].map(({ val, label }) => (
-                    <div key={label} className="flex flex-col">
-                      <span className="font-mono text-[1rem] font-bold text-red">{val}</span>
-                      <span className="font-mono text-[10px] text-muted tracking-[0.1em] uppercase mt-0.5">{label}</span>
-                    </div>
-                  ))}
-                </div>
-                <a
-                  href="/Apple Pencil Project Julian - Engineering Portfolio.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-[11px] text-red tracking-[0.1em] uppercase no-underline border border-red/28 px-3 py-2 hover:bg-red hover:text-white transition-all duration-200 flex-shrink-0"
-                >
-                  View Report →
-                </a>
-              </div>
-            </div>
-            {/* Col 2: description */}
-            <div className="p-8 border-r border-black/8 max-[900px]:border-r-0 max-[900px]:border-b">
-              <p className="text-[0.87rem] text-muted leading-[1.8]">
-                Identified a real problem in a school IT department and delivered a full engineering design cycle — from user interviews through 4+ prototype iterations to a finished, tested product.
-              </p>
-            </div>
-            {/* Col 3: bullets */}
-            <div className="p-8">
-              <ul className="proj-bullets list-none flex flex-col gap-3">
-                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Interviewed school IT director who reported 8 lost/damaged peripherals per year (~€120 each); defined 16-point design specification covering child safety, ergonomics, and material toxicity</li>
-                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Designed 6 competing concepts in Fusion 360 and selected optimal design through scoring and client feedback</li>
-                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Prototyped in cardboard then PLA — passed 10N magnetic pull test and survived 20 drops from 1.5m</li>
-                <li className="text-[0.82rem] text-muted flex items-start gap-3 leading-[1.5]">Final product: €0.86 in filament, 26.72g, non-toxic PLA, no sharp edges, no choking hazards</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* ── Project 03 — RC Aircraft (5 images, mixed orientations) ──── */}
-        <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
-          <Carousel
-            images={[
-              { src: "/images/rc-aircraft-complete.jpg", alt: "Completed Eclipson Wolf" },
-              { src: "/images/rc-aircraft-assembly.jpg", alt: "Aircraft assembly" },
-              { src: "/images/rc-aircraft-fuselage.jpg", alt: "Fuselage assembly" },
-              { src: "/images/rc-aircraft-wing.jpg", alt: "Wing section" },
-              { src: "/images/rc-aircraft-prop.jpg", alt: "Carbon prop and motor" },
-            ]}
-            containerClass="aspect-[4/3]"
-            fit="contain"
-          />
-          <div className="p-8 px-10">
-            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">03</div>
-            <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">Avionics / Systems</div>
-            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">RC Fixed-Wing Aircraft Build — Eclipson G1 Wolf</h3>
-            <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
-              Ongoing build of a 3D-printed fixed-wing RC aircraft. Printing all structural components on a Bambu X1 Carbon, integrating a full avionics stack (brushless motor, ESC, servos, FlySky receiver, LiPo).
-            </p>
-            <div className="flex gap-2.5 flex-wrap">
-              {["Bambu X1 Carbon printed", "Full avionics integration", "Carbon-fiber prop", "FEA structural analysis", "FlySky FS-iA10B"].map((s) => (
-                <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-
-        {/* ── Project 04 — CNC Machining / AMD ──── */}
-        <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
-          <Carousel
-            images={[
-              { src: "/images/amd-cnc-part.jpg", alt: "CNC-machined AMD x AKPsi aluminum block" },
-              { src: "/images/amd-cnc-car.jpg", alt: "Sitting in FSAE car at AMD event" },
-            ]}
-            containerClass="aspect-[4/3]"
-            fit="contain"
-          />
-          <div className="border-t border-black/8 bg-bg2 grid grid-cols-2 max-[700px]:grid-cols-1">
-            <video autoPlay muted loop playsInline controls className="w-full max-h-[340px] object-contain border-r border-black/8 max-[700px]:border-r-0 max-[700px]:border-b">
-              <source src="/images/amd-cnc-video1.mov" type="video/mp4" />
-            </video>
-            <video autoPlay muted loop playsInline controls className="w-full max-h-[340px] object-contain">
-              <source src="/images/amd-cnc-video2.mov" type="video/mp4" />
-            </video>
-          </div>
-          <div className="p-8 px-10">
-            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">04</div>
-            <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">CNC Machining</div>
-            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">Learning CNC Machining — AMD Campus Visit</h3>
-            <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
-              Organized a company visit to AMD as Co-STEAM Chair for Alpha Kappa Psi with an on-site host. To mark the event, I designed and CNC-machined a custom aluminum piece engraved with AMD × AKΨ, bridging hands-on fabrication with professional development.
-            </p>
-            <div className="flex gap-2.5 flex-wrap">
-              {["CNC Milling", "Aluminum", "Alpha Kappa Psi", "Event Coordination"].map((s) => (
-                <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ── Project 05 — Raptor Model ──── */}
-        <div className="border border-black/8 mb-6 transition-colors duration-300 hover:border-red/28">
-          <Carousel
-            images={[
-              { src: "/images/raptor-model.jpg", alt: "SpaceX Raptor engine model" },
-              { src: "/images/raptor-model-held.jpg", alt: "Raptor model held" },
-            ]}
-            containerClass="aspect-[4/3]"
-            fit="contain"
-          />
-          <div className="p-8 px-10">
-            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">06</div>
-            <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">3D Printing / Modeling</div>
-            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">SpaceX Raptor Engine — 3D Printed Scale Model</h3>
-            <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
-              Sourced and printed a detailed multi-part scale model of the SpaceX Raptor engine. Multi-material print in black and white PLA capturing turbopumps, plumbing, and bell geometry. Driven by interest in full-flow staged combustion propulsion.
-            </p>
-            <div className="flex gap-2.5 flex-wrap">
-              {["Multi-material PLA", "Full-flow cycle reference"].map((s) => (
-                <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ── Project 07 — Rocket Propellant ── */}
-        <div className="border border-black/8 border-t-0 mb-6 transition-colors duration-300 hover:border-red/28">
-          <Carousel
-            images={[
-              { src: "/images/rocket-fuel-cooking.jpg", alt: "Cooking sugar fuel mixture" },
-              { src: "/images/rocket-fuel-kno3.jpg", alt: "Potassium nitrate oxidizer" },
-              { src: "/images/rocket-fuel-ingredients.jpg", alt: "Fuel ingredients setup" },
-            ]}
-            containerClass="aspect-[4/3]"
-            fit="contain"
-          />
-          {/* Ignition video */}
-          <div className="border-t border-black/8 bg-bg2">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              controls
-              className="w-full max-h-[420px] object-contain"
+        <div className="relative mx-auto w-full max-w-[1100px] px-6 pb-24 max-[734px]:pb-16">
+          <p
+            className="mb-3 text-[14px] font-semibold text-white/95"
+            style={{ textShadow: "0 1px 14px rgba(0,0,0,0.85)" }}
+          >
+            Mechanical Engineering · Santa Clara University · Class of 2029
+          </p>
+          <h1
+            className="mb-5 font-semibold tracking-[-0.025em] text-white"
+            style={{ fontSize: "clamp(2.75rem, 7vw, 5.5rem)", lineHeight: 1.02 }}
+          >
+            Julian Trotzenberg
+          </h1>
+          <p className="mb-9 max-w-[560px] text-[1.15rem] leading-[1.55] text-[#e8e8ed]">
+            Wind tunnels, 3D printed parts, machined aluminum. Aiming at aerospace, propulsion,
+            and electric vehicles.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              className="rounded-full bg-azure px-7 py-3 text-[15px] font-medium text-white no-underline transition-colors duration-200 hover:bg-azure-bright"
             >
-              <source src="/images/rocket-ignition.mov" type="video/mp4" />
-            </video>
-          </div>
-          <div className="p-8 px-10">
-            <div className="font-mono text-[10px] text-muted tracking-[0.2em] mb-1">07</div>
-            <div className="inline-block font-mono text-[10px] text-red bg-red/7 border border-red/28 px-2.5 py-0.5 tracking-[0.12em] uppercase mb-3">Propulsion / Chemistry</div>
-            <h3 className="text-[1.1rem] font-bold text-accent mb-2 tracking-[-0.01em] leading-[1.2]">Sugar Fuel — A Bit of Dangerous Fun</h3>
-            <p className="text-[0.85rem] text-muted leading-[1.65] mb-4">
-              Mixed and tested a potassium nitrate / sugar caramel propellant compound and tested the fuel in my backyard. A first experiment in oxidizer-fuel ratios and burn behavior.
-            </p>
-            <div className="flex gap-2.5 flex-wrap">
-              {["KNO₃ / sugar mixture", "Custom nozzle casing", "Ignition tested", "Burn rate observed"].map((s) => (
-                <span key={s} className="font-mono text-[10px] text-red tracking-[0.05em] bg-red/7 px-2.5 py-1.5 border border-red/28">{s}</span>
-              ))}
-            </div>
+              See the work
+            </a>
+            <a
+              href="mailto:jtrotzenberg@scu.edu"
+              className="rounded-full border border-[rgba(255,255,255,0.4)] px-7 py-3 text-[15px] font-medium text-white no-underline backdrop-blur-sm transition-colors duration-200 hover:border-white"
+            >
+              Get in touch
+            </a>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* DIVIDER */}
-      <div className="h-px bg-black/8 mx-12 max-[900px]:mx-6" />
+      {/* PROJECTS INTRO */}
+      <section id="projects" className="bg-paper2 py-24 max-[734px]:py-16">
+        <Reveal>
+          <div className="mx-auto max-w-[800px] px-6 text-center">
+            <h2
+              className="mb-4 font-semibold tracking-[-0.02em] text-ink"
+              style={{ fontSize: "clamp(2.25rem, 5.5vw, 4rem)", lineHeight: 1.05 }}
+            >
+              Selected work.
+            </h2>
+            <p className="mx-auto max-w-[560px] text-[1.1rem] leading-[1.6] text-ink-muted">
+              Seven projects, from a homemade wind tunnel to a first machined part.
+            </p>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* 01 WIND TUNNEL (light) */}
+      <Chapter
+        eyebrow="Aerodynamics Research"
+        title="A wind tunnel, built from scratch."
+        intro="Seven 3D printed airfoils, three wind speeds, and over a thousand data points to find the wing sweep angle that maximizes lift to drag. The same variable sweep logic that shaped the F-14 Tomcat."
+        stats={[
+          { value: "1,000+", label: "Data points" },
+          { value: "3", label: "Wind speeds" },
+          { value: "7", label: "Airfoils tested" },
+        ]}
+        highlights={[
+          {
+            lead: "Designed in Fusion 360.",
+            body: "Seven NACA 0015 airfoils spanning 0° to 60° of sweep, printed to 0.2 mm accuracy on a Bambu X1 Carbon.",
+          },
+          {
+            lead: "Engineered for clean data.",
+            body: "Two tunnel iterations with a laminar flow straw inlet, pulley based drag measurement, and a rail mounted force isolation cart.",
+          },
+          {
+            lead: "A real result.",
+            body: "Drag falls off sharply past 30° of sweep while lift follows a cos squared relationship, supporting variable sweep aircraft design.",
+          },
+        ]}
+        reportHref="/Aerodynamics Research Project Julian.pdf"
+      >
+        <Gallery
+          items={[
+            { src: "/images/wind-tunnel-setup.jpg", alt: "Full wind tunnel setup" },
+            { src: "/images/wind-tunnel-building.jpg", alt: "Building the wind tunnel" },
+            { src: "/images/wind-tunnel-inlet.jpg", alt: "Straw laminar flow inlet" },
+            { src: "/images/wind-tunnel-airfoils.jpg", alt: "Seven NACA 0015 airfoils", wide: true },
+          ]}
+        />
+      </Chapter>
+
+      {/* 02 PENSAFE (dark) */}
+      <Chapter
+        dark
+        eyebrow="Product Design"
+        title="PenSafe. Small part, big savings."
+        intro="A school IT department was losing eight peripherals a year at about €120 each. One interview, six concepts, and four prototype iterations later: a tested retention device that costs €0.86 to print."
+        stats={[
+          { value: "€0.86", label: "Unit cost" },
+          { value: "10 N", label: "Pull test passed" },
+          { value: "20", label: "Drop tests survived" },
+        ]}
+        highlights={[
+          {
+            lead: "Started with an interview.",
+            body: "Conversations with the IT director produced a 16 point design specification covering child safety, ergonomics, and material toxicity.",
+          },
+          {
+            lead: "Chosen by scoring.",
+            body: "Six competing concepts modeled in Fusion 360, narrowed through a weighted decision matrix and client feedback.",
+          },
+          {
+            lead: "Proven by testing.",
+            body: "The final PLA print passed a 10 N magnetic pull test and survived 20 drops from 1.5 m, with no sharp edges or choking hazards.",
+          },
+        ]}
+        reportHref="/Apple Pencil Project Julian - Engineering Portfolio.pdf"
+      >
+        <Gallery
+          dark
+          items={[
+            { src: "/images/pencil-device.png", alt: "PenSafe retention device", fit: "contain" },
+            { src: "/images/pencil-held.png", alt: "Device held showing mount", fit: "contain" },
+            { src: "/images/pencil-cad.png", alt: "Exploded CAD diagram", fit: "contain" },
+            { src: "/images/pencil-iterations.png", alt: "Design iteration sheet", fit: "contain", wide: true },
+          ]}
+        />
+      </Chapter>
+
+      {/* 03 FPV DRONE (light) */}
+      <Chapter
+        eyebrow="Composites and Flight"
+        title="A drone on a carbon fiber chassis."
+        intro="An FPV drone built together with a friend, flying on a chassis we laid up ourselves in carbon fiber. From raw cloth and resin to a stiff, lightweight frame with the full flight stack mounted on top."
+        highlights={[
+          {
+            lead: "Laid up by hand.",
+            body: "Woven carbon fiber wrapped and cured over a printed core, giving a one piece frame instead of flat cut plates.",
+          },
+          {
+            lead: "Built in two halves.",
+            body: "Constructed as two shells with curvature designed for maximum roll rigidity to weight ratio.",
+          },
+          {
+            lead: "A full flight stack.",
+            body: "Flight controller and ESC stack, FPV camera, and four brushless motors wired directly onto the frame.",
+          },
+        ]}
+      >
+        <Gallery
+          items={[
+            { src: "/images/drone-sunset.jpg", alt: "FPV drone in a field at sunset", wide: true },
+            { src: "/images/drone-skyline.jpg", alt: "FPV drone in front of the Long Beach skyline", wide: true },
+            { src: "/images/drone-electronics.jpg", alt: "Flight controller stack mounted on the bare chassis" },
+            { src: "/images/drone-chassis.jpg", alt: "Carbon fiber chassis fresh out of layup", wide: true },
+            { src: "/images/drone-iterations.jpg", alt: "Two chassis iterations side by side" },
+          ]}
+        />
+      </Chapter>
+
+      {/* 04 RC AIRCRAFT (dark) */}
+      <Chapter
+        dark
+        eyebrow="Avionics and Systems"
+        title="An aircraft, part by part."
+        intro="An Eclipson Model G1 Wolf, 3D printed on a Bambu X1 Carbon and fitted with a full avionics stack: brushless motor, ESC, servos, FlySky receiver, and LiPo power. An ongoing build, currently waiting for me back in Germany."
+      >
+        <Gallery
+          dark
+          items={[
+            { src: "/images/rc-aircraft-complete.jpg", alt: "Completed Eclipson Wolf", wide: true },
+            { src: "/images/rc-aircraft-assembly.jpg", alt: "Aircraft assembly" },
+            { src: "/images/rc-aircraft-fuselage.jpg", alt: "Fuselage assembly" },
+            { src: "/images/rc-aircraft-wing.jpg", alt: "Wing section" },
+            { src: "/images/rc-aircraft-prop.jpg", alt: "Carbon fiber prop and motor" },
+          ]}
+        />
+      </Chapter>
+
+      {/* 05 CNC / AMD (light) */}
+      <Chapter
+        eyebrow="CNC Machining"
+        title="Machined in aluminum."
+        intro="As Co-STEAM Chair of Alpha Kappa Psi, I organized a company visit to AMD. To mark the event, I designed and CNC machined a custom aluminum piece engraved AMD × AKΨ."
+        highlights={[
+          {
+            lead: "First chips.",
+            body: "CAM setup, workholding, and toolpaths for a first machined part, cut in 6061 aluminum.",
+          },
+          {
+            lead: "Engraved to mark the event.",
+            body: "Custom AMD × AKΨ engraving designed to commemorate the visit, hosted by Jerry Wong of AMD.",
+          },
+          {
+            lead: "Beyond the shop.",
+            body: "Coordinated the visit end to end with Co-STEAM Chair Justin Shao, from outreach to the on-site program.",
+          },
+        ]}
+      >
+        <Gallery
+          items={[
+            { src: "/images/amd-cnc-part.jpg", alt: "CNC machined AMD x AKPsi aluminum block" },
+            { src: "/images/amd-cnc-car.jpg", alt: "Sitting in the FSAE car at the AMD event" },
+            { src: "/images/amd-event-group.jpg", alt: "With Co-STEAM Chair Justin Shao and Jerry Wong from AMD", portrait: true },
+            { type: "video", src: "/images/amd-cnc-video1.mp4" },
+            { type: "video", src: "/images/amd-cnc-video2.mp4" },
+          ]}
+        />
+      </Chapter>
+
+      {/* 06 RAPTOR (dark) */}
+      <Chapter
+        dark
+        eyebrow="Propulsion"
+        title="Desktop Raptor."
+        intro="A multi-part scale model of the SpaceX Raptor engine, printed in black and white PLA with turbopumps, plumbing, and bell geometry. Driven by an interest in full flow staged combustion."
+        highlights={[
+          {
+            lead: "Multi-material print.",
+            body: "Black and white PLA passes capturing the turbomachinery, plumbing runs, and nozzle bell.",
+          },
+          {
+            lead: "Printed to learn.",
+            body: "The easiest way to figure out how a rocket engine actually works is to put one on your desk.",
+          },
+          {
+            lead: "Scanned in 3D.",
+            body: raptorSplat
+              ? "Captured as a Gaussian splat so you can orbit the real object right here on the page."
+              : "A Gaussian splat capture is in the works, so you can soon orbit the real object right on this page.",
+          },
+        ]}
+      >
+        {raptorSplat ? (
+          <div className="mx-auto max-w-[1100px] px-6">
+            <SplatViewer src={raptorSplat} dark />
+          </div>
+        ) : (
+          <>
+            <Gallery
+              dark
+              items={[
+                { src: "/images/raptor-model.jpg", alt: "SpaceX Raptor engine model", wide: true },
+                { src: "/images/raptor-model-held.jpg", alt: "Raptor model held" },
+              ]}
+            />
+            <p className="mt-6 text-center text-[13px] text-snow-muted">
+              Interactive 3D scan coming soon.
+            </p>
+          </>
+        )}
+      </Chapter>
+
+      {/* 07 SUGAR FUEL (light) */}
+      <Chapter
+        eyebrow="Chemistry"
+        title="Sugar fuel. A bit of dangerous fun."
+        intro="A potassium nitrate and sugar caramel propellant, mixed, cast, and ignited in the backyard. A first experiment in oxidizer to fuel ratios and burn behavior."
+        highlights={[
+          {
+            lead: "KNO₃ and sugar.",
+            body: "Caramelized propellant compound mixed to a controlled oxidizer to fuel ratio.",
+          },
+          {
+            lead: "No questions asked.",
+            body: "Thankfully none of my neighbors questioned the massive plume of smoke in the sky.",
+          },
+          {
+            lead: "Ignition tested.",
+            body: "Burn rate and plume behavior observed across test firings.",
+          },
+        ]}
+      >
+        <Gallery
+          items={[
+            { type: "video", src: "/images/rocket-ignition.mov" },
+            { src: "/images/rocket-fuel-cooking.jpg", alt: "Cooking the sugar fuel mixture" },
+            { src: "/images/rocket-fuel-kno3.jpg", alt: "Potassium nitrate oxidizer" },
+            { src: "/images/rocket-fuel-ingredients.jpg", alt: "Fuel ingredients setup" },
+          ]}
+        />
+      </Chapter>
+
+      {/* FSAE UPRIGHT (dark, appears when the model file exists) */}
+      {uprightModel && (
+        <Chapter
+          dark
+          eyebrow="Formula SAE"
+          title="The upright, in 3D."
+          intro="A corner assembly designed and simulated in SolidWorks for the SCU Formula SAE car: upright, hub, and tire. Rendered here as an interactive model. Drag it around."
+        >
+          <div className="mx-auto max-w-[1100px] px-6">
+            <ModelViewer src={uprightModel} dark />
+          </div>
+        </Chapter>
+      )}
 
       {/* SKILLS */}
-      <div className="px-12 max-[900px]:px-6 py-24 max-w-[1200px] mx-auto" id="skills">
-        <div className="section-label font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-3 flex items-center gap-3">Capabilities</div>
-        <h2 className="font-extrabold tracking-[-0.03em] leading-[1.05] mb-12 text-accent" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
-          Skills &amp; Tools
-        </h2>
-        <div className="grid grid-cols-3 max-[900px]:grid-cols-1 gap-px bg-black/8">
-          {[
-            { title: "// CAD & Simulation", items: ["Fusion 360 (parametric modeling)", "FEA structural analysis", "CFD (familiarization)", "NACA airfoil design", "Assembly & tolerance design"] },
-            { title: "// Manufacturing", items: ["FDM 3D printing (Bambu X1 Carbon)", "Multi-material PLA printing", "Gas engine disassembly & rebuild", "Mechanical assembly", "Rapid prototyping"] },
-            { title: "// Engineering Practice", items: ["Experimental design & testing", "Data collection & analysis (1K+ pts)", "Avionics integration (ESC / servo / Rx)", "Design spec scoring (16-point matrix)", "Technical documentation"] },
-          ].map(({ title, items }) => (
-            <div key={title} className="bg-bg p-8">
-              <div className="font-mono text-[11px] text-red tracking-[0.15em] uppercase mb-5">{title}</div>
-              <ul className="skill-list list-none flex flex-col gap-2.5">
-                {items.map((item) => (
-                  <li key={item} className="text-[0.9rem] text-muted flex items-center gap-2.5">{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* DIVIDER */}
-      <div className="h-px bg-black/8 mx-12 max-[900px]:mx-6" />
-
-      {/* ABOUT */}
-      <div className="px-12 max-[900px]:px-6 py-24 max-w-[1200px] mx-auto" id="about">
-        <div className="section-label font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-3 flex items-center gap-3">Background</div>
-        <h2 className="font-extrabold tracking-[-0.03em] leading-[1.05] mb-12 text-accent" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
-          About Me
-        </h2>
-        <div className="max-w-[640px]">
-          <div className="text-[1rem] text-muted leading-[1.8]">
-            <p className="mb-5">
-              I&apos;m a{" "}
-              <strong className="text-primary font-semibold">freshman mechanical engineering student at Santa Clara University</strong>
-              . I like to build things.
-            </p>
-            <p className="mb-5">
-              I&apos;m drawn to engineering problems where{" "}
-              <strong className="text-primary font-semibold">physics meets hardware</strong> — where you can&apos;t just simulate your way to an answer and have to build, test, and iterate. That instinct led me to build a wind tunnel from scratch, fly a 3D-printed aircraft, and tear down a 100cc engine.
-            </p>
-            <p>
-              I&apos;m looking for{" "}
-              <strong className="text-primary font-semibold">summer 2026 internships</strong> in aerospace or EV — anywhere the hardware is hard and the problems are unsolved.
-            </p>
+      <section id="skills" className="bg-paper2 py-28 max-[734px]:py-20">
+        <Reveal>
+          <div className="mx-auto max-w-[800px] px-6 text-center">
+            <h2
+              className="mb-4 font-semibold tracking-[-0.02em] text-ink"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.08 }}
+            >
+              Skills and tools.
+            </h2>
           </div>
-        </div>
-      </div>
-
-      {/* CONTACT */}
-      <div className="bg-bg2 border-t border-black/8" id="contact">
-        <div className="max-w-[1200px] mx-auto px-12 max-[900px]:px-6 py-20 flex justify-between items-center gap-12 flex-wrap max-[900px]:flex-col">
-          <div>
-            <div className="section-label font-mono text-[11px] text-red tracking-[0.2em] uppercase mb-3 flex items-center gap-3">Available Summer 2026</div>
-            <div className="font-extrabold tracking-[-0.03em] text-accent leading-[1.1]" style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)" }}>
-              Let&apos;s build<br />something fast.
-            </div>
-          </div>
-          <div className="flex flex-col gap-4">
+        </Reveal>
+        <Reveal>
+          <div className="mx-auto mt-12 grid max-w-[1100px] grid-cols-3 gap-5 px-6 max-[900px]:grid-cols-1">
             {[
-              { href: "mailto:jtrotzenberg@scu.edu", icon: "@", label: "jtrotzenberg@scu.edu" },
-              { href: "tel:5622097315", icon: "✆", label: "(562) 209-7315" },
-              { href: "https://linkedin.com/in/julian-trotzenberg-b5a53b2a8", icon: "in", label: "linkedin.com/in/julian-trotzenberg", external: true },
-            ].map(({ href, icon, label, external }) => (
-              <a key={href} href={href} className="flex items-center gap-4 font-mono text-[13px] text-muted no-underline hover:text-red transition-colors duration-200"
-                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
-                <div className="w-9 h-9 border border-black/8 flex items-center justify-center text-[14px] flex-shrink-0">{icon}</div>
-                {label}
-              </a>
+              {
+                title: "CAD and Simulation",
+                items: [
+                  "Fusion 360 and SolidWorks",
+                  "FEA structural analysis",
+                  "Ansys transient thermal analysis",
+                  "SolidWorks topology optimization",
+                  "CFD familiarization",
+                  "NACA airfoil design",
+                  "Assembly and tolerance design",
+                ],
+              },
+              {
+                title: "Manufacturing",
+                items: [
+                  "FDM 3D printing (Bambu X1 Carbon)",
+                  "CNC milling (aluminum)",
+                  "Carbon fiber layup",
+                  "PLA and PETG printing",
+                  "Gas engine disassembly and rebuild",
+                  "Rapid prototyping",
+                ],
+              },
+              {
+                title: "Engineering Practice",
+                items: [
+                  "Experimental design and testing",
+                  "Data collection and analysis",
+                  "Avionics integration",
+                  "Design spec scoring",
+                  "Technical documentation",
+                ],
+              },
+            ].map(({ title, items }) => (
+              <div key={title} className="rounded-[1.5rem] bg-paper p-8">
+                <h3 className="mb-5 text-[1.1rem] font-semibold text-ink">{title}</h3>
+                <ul className="flex list-none flex-col gap-2.5">
+                  {items.map((item) => (
+                    <li key={item} className="text-[15px] leading-[1.5] text-ink-muted">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
-        </div>
-      </div>
+        </Reveal>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" className="bg-paper py-28 max-[734px]:py-20">
+        <Reveal>
+          <div className="mx-auto max-w-[720px] px-6 text-center">
+            <h2
+              className="mb-8 font-semibold tracking-[-0.02em] text-ink"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.08 }}
+            >
+              I like to build things.
+            </h2>
+            <div className="text-[1.1rem] leading-[1.7] text-ink-muted">
+              <p className="mb-5">
+                I&apos;m a mechanical engineering student at Santa Clara University. Most of what
+                I&apos;ve learned came from projects: a wind tunnel in my bedroom, a torn down 100cc
+                engine, a half printed RC plane waiting for me back in Germany.
+              </p>
+              <p>
+                These days most of my time goes to the SCU Formula SAE team, where I design and
+                simulate suspension components. I&apos;m looking for{" "}
+                <strong className="font-semibold text-ink">summer 2027 internships</strong> in
+                aerospace, EVs, product design, or defense.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" className="bg-night py-28 max-[734px]:py-20">
+        <Reveal>
+          <div className="mx-auto max-w-[720px] px-6 text-center">
+            <p className="mb-3 text-[14px] font-semibold text-azure-bright">Available summer 2027</p>
+            <h2
+              className="mb-10 font-semibold tracking-[-0.02em] text-snow"
+              style={{ fontSize: "clamp(2.25rem, 5.5vw, 4rem)", lineHeight: 1.05 }}
+            >
+              Get in touch.
+            </h2>
+            <div className="mb-12 flex flex-wrap justify-center gap-4">
+              <a
+                href="mailto:jtrotzenberg@scu.edu"
+                className="rounded-full bg-azure px-7 py-3 text-[15px] font-medium text-white no-underline transition-colors duration-200 hover:bg-azure-bright"
+              >
+                Email me
+              </a>
+              <a
+                href="https://linkedin.com/in/julian-trotzenberg-b5a53b2a8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-[rgba(255,255,255,0.4)] px-7 py-3 text-[15px] font-medium text-snow no-underline transition-colors duration-200 hover:border-white"
+              >
+                LinkedIn
+              </a>
+            </div>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-[14px] text-snow-muted">
+              <span>jtrotzenberg@scu.edu</span>
+              <span>(562) 209-7315</span>
+            </div>
+          </div>
+        </Reveal>
+      </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-black/8 px-12 max-[900px]:px-6 py-6 flex justify-between items-center max-[900px]:flex-col max-[900px]:gap-2 max-[900px]:text-center">
-        <span className="font-mono text-[11px] text-muted tracking-[0.1em]">© 2026 Julian Trotzenberg</span>
-        <span className="font-mono text-[11px] text-muted tracking-[0.1em]">Mechanical Engineering · Santa Clara University · Class of 2029</span>
+      <footer className="bg-night px-6 py-8">
+        <div className="mx-auto flex max-w-[1100px] flex-wrap items-center justify-between gap-2 border-t border-[rgba(255,255,255,0.14)] pt-6 max-[734px]:flex-col max-[734px]:text-center">
+          <span className="text-[12px] text-snow-muted">© 2026 Julian Trotzenberg</span>
+          <span className="text-[12px] text-snow-muted">
+            Mechanical Engineering · Santa Clara University · Class of 2029
+          </span>
+        </div>
       </footer>
     </>
   );
