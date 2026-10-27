@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Reveal from "./Reveal";
 
 export interface Stat {
@@ -11,13 +12,24 @@ export interface Highlight {
   body: string;
 }
 
+export interface Hero {
+  src: string;
+  alt: string;
+  /** Tailwind aspect class for the frame; defaults to 16/9 */
+  aspect?: string;
+}
+
 interface ChapterProps {
   eyebrow: string;
   title: string;
   intro: string;
   dark?: boolean;
+  /** Large lead image shown above the heading */
+  hero?: Hero;
   stats?: Stat[];
   highlights?: Highlight[];
+  /** Tools and methods, shown as pills at the end of the chapter */
+  tags?: string[];
   reportHref?: string;
   /** Media area: gallery, splat viewer, model viewer, videos */
   children?: ReactNode;
@@ -29,8 +41,10 @@ export default function Chapter({
   title,
   intro,
   dark = false,
+  hero,
   stats,
   highlights,
+  tags,
   reportHref,
   children,
 }: ChapterProps) {
@@ -41,6 +55,26 @@ export default function Chapter({
 
   return (
     <section className={`${dark ? "bg-night" : "bg-paper"} py-28 max-[734px]:py-20`}>
+      {hero && (
+        <Reveal className="mb-16 max-[734px]:mb-10">
+          <div className="mx-auto max-w-[1100px] px-6">
+            <div
+              className={`relative ${hero.aspect ?? "aspect-[16/9]"} w-full overflow-hidden rounded-[1.75rem] ${
+                dark ? "bg-night2" : "bg-paper2"
+              }`}
+            >
+              <Image
+                src={hero.src}
+                alt={hero.alt}
+                fill
+                sizes="(max-width: 734px) 92vw, 1100px"
+                className="object-contain"
+              />
+            </div>
+          </div>
+        </Reveal>
+      )}
+
       <Reveal>
         <div className="mx-auto max-w-[800px] px-6 text-center">
           <p className={`mb-3 text-[14px] font-semibold ${accent}`}>{eyebrow}</p>
@@ -81,6 +115,25 @@ export default function Chapter({
               <p key={lead} className={`text-[15px] leading-[1.65] ${muted}`}>
                 <strong className={`font-semibold ${text}`}>{lead}</strong> {body}
               </p>
+            ))}
+          </div>
+        </Reveal>
+      )}
+
+      {tags && tags.length > 0 && (
+        <Reveal>
+          <div className="mx-auto mt-14 flex max-w-[800px] flex-wrap justify-center gap-3 px-6 max-[734px]:mt-10">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className={`rounded-full px-4 py-1.5 text-[13px] ${
+                  dark
+                    ? "bg-[rgba(255,255,255,0.1)] text-snow-muted"
+                    : "bg-[rgba(0,0,0,0.05)] text-ink-muted"
+                }`}
+              >
+                {tag}
+              </span>
             ))}
           </div>
         </Reveal>

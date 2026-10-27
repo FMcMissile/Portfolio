@@ -12,6 +12,8 @@ export interface GalleryItem {
   wide?: boolean;
   /** portrait tiles use a 3/4 aspect */
   portrait?: boolean;
+  /** one-line caption shown under the tile */
+  caption?: string;
 }
 
 interface GalleryProps {
@@ -58,6 +60,7 @@ export default function Gallery({ items, dark = false, tall = false }: GalleryPr
   };
 
   const tileBg = dark ? "bg-night2" : "bg-paper2";
+  const captionText = dark ? "text-snow-muted" : "text-ink-muted";
   const paddle = dark
     ? "bg-[rgba(255,255,255,0.1)] text-snow hover:bg-[rgba(255,255,255,0.18)] disabled:opacity-30"
     : "bg-[rgba(0,0,0,0.06)] text-ink hover:bg-[rgba(0,0,0,0.12)] disabled:opacity-30";
@@ -66,7 +69,7 @@ export default function Gallery({ items, dark = false, tall = false }: GalleryPr
     <div>
       <div
         ref={trackRef}
-        className={`no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto px-[max(1.5rem,calc((100vw-1100px)/2))] scroll-px-[max(1.5rem,calc((100vw-1100px)/2))] ${
+        className={`no-scrollbar flex items-start snap-x snap-mandatory gap-5 overflow-x-auto px-[max(1.5rem,calc((100vw-1100px)/2))] scroll-px-[max(1.5rem,calc((100vw-1100px)/2))] ${
           fits ? "justify-center" : ""
         }`}
       >
@@ -80,17 +83,16 @@ export default function Gallery({ items, dark = false, tall = false }: GalleryPr
                 ? "aspect-[16/10]"
                 : "aspect-[4/3]";
           return (
-            <div
-              key={item.src}
-              data-slide
-              className={`relative ${
-                tall
-                  ? "h-[640px] max-[900px]:h-[520px] max-[734px]:h-[420px]"
-                  : "h-[420px] max-[734px]:h-[300px]"
-              } ${aspect} flex-shrink-0 snap-start overflow-hidden rounded-[1.5rem] ${
-                item.fit === "contain" ? "bg-paper2" : tileBg
-              }`}
-            >
+            <figure key={item.src} data-slide className="m-0 flex-shrink-0 snap-start">
+              <div
+                className={`relative ${
+                  tall
+                    ? "h-[640px] max-[900px]:h-[520px] max-[734px]:h-[420px]"
+                    : "h-[420px] max-[734px]:h-[300px]"
+                } ${aspect} overflow-hidden rounded-[1.5rem] ${
+                  item.fit === "contain" ? "bg-paper2" : tileBg
+                }`}
+              >
               {isVideo ? (
                 <video
                   autoPlay
@@ -111,7 +113,13 @@ export default function Gallery({ items, dark = false, tall = false }: GalleryPr
                   className={item.fit === "contain" ? "object-contain p-4" : "object-cover"}
                 />
               )}
-            </div>
+              </div>
+              {item.caption && (
+                <figcaption className={`mt-4 max-w-[46ch] text-[14px] leading-[1.5] ${captionText}`}>
+                  {item.caption}
+                </figcaption>
+              )}
+            </figure>
           );
         })}
       </div>

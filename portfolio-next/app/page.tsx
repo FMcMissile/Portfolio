@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Reveal from "./components/Reveal";
 import Gallery from "./components/Gallery";
 import Chapter from "./components/Chapter";
+import FigureStack from "./components/FigureStack";
 import SplatViewer from "./components/SplatViewer";
 import ModelViewer from "./components/ModelViewer";
 
@@ -85,13 +86,92 @@ export default function Home() {
               Selected work.
             </h2>
             <p className="mx-auto max-w-[560px] text-[1.1rem] leading-[1.6] text-ink-muted">
-              Seven projects, from a homemade wind tunnel to a first machined part.
+              Nine projects, from a homemade wind tunnel to a Formula SAE corner package.
             </p>
           </div>
         </Reveal>
       </section>
 
-      {/* 01 WIND TUNNEL (light) */}
+      {/* 01 FRONT UPRIGHT (light) */}
+      <Chapter
+        eyebrow="Bronco Racing FSAE Electric, 2026"
+        title="Front Upright"
+        intro="A front upright for Bronco Racing's second-generation FSAE Electric car, designed in SolidWorks around four priorities: safety, ease of manufacturing, easy adjustment, and low unsprung mass. It is machined from 6061-T6 aluminum in geometry that can be cut in one or two setups on a 3-axis mill, with a bolt-on upper mount so steering geometry can be tuned without remaking the whole part. The hub runs on an opposed pair of tapered roller bearings with a K7 housing fit. FEA under pure cornering and combined braking and cornering shaped the final design and showed that, for the same 20 mm of space, widening the bearing pair cut peak bearing load four times more than moving it inboard."
+        hero={{
+          src: "/projects/upright/hero.webp",
+          alt: "Front upright with brake rotor and wheel assembly",
+          aspect: "aspect-[4/3]",
+        }}
+        tags={["SolidWorks", "FEA", "Bearing Design", "Design for Manufacturing"]}
+      >
+        <Gallery
+          items={[
+            {
+              src: "/projects/upright/render.webp",
+              alt: "Front upright render",
+              fit: "contain",
+              caption: "Front upright, machined from 6061-T6 aluminum",
+            },
+            {
+              src: "/projects/upright/rear.webp",
+              alt: "Rear upright render",
+              fit: "contain",
+              portrait: true,
+              caption: "Rear upright, same design approach",
+            },
+            {
+              src: "/projects/upright/fea.webp",
+              alt: "Stress plot of the front upright",
+              fit: "contain",
+              portrait: true,
+              caption: "Stress under combined braking and cornering",
+            },
+          ]}
+        />
+      </Chapter>
+
+      {/* 02 LAP SIMULATION (dark) */}
+      <Chapter
+        dark
+        eyebrow="Brake energy model, MATLAB"
+        title="Lap Simulation"
+        intro="A point-mass lap simulation I wrote from scratch in MATLAB to find out how much energy the brakes absorb over an endurance lap. It rebuilds the track from corner radii, then runs a forward pass for acceleration and a backward pass for braking, using an asymmetric friction ellipse to blend cornering with braking or accelerating. Halving the step size changed lap time by under half a second, so the result is stable. Summing the speed lost under braking gives about 1.6 MJ per lap, roughly 13 hard stops from 67 to 22 mph, which became the heat load for my brake rotor thermal study."
+        hero={{
+          src: "/projects/lap-sim/hero.webp",
+          alt: "Reconstructed track path beside the lap speed trace",
+          aspect: "aspect-[13/5]",
+        }}
+        tags={["MATLAB", "Vehicle Dynamics", "Simulation"]}
+      >
+        <FigureStack
+          dark
+          figures={[
+            {
+              src: "/projects/lap-sim/ellipse.webp",
+              alt: "Asymmetric friction ellipse",
+              width: 1036,
+              height: 675,
+              caption: "Asymmetric friction ellipse: more grip under braking than under power",
+            },
+            {
+              src: "/projects/lap-sim/passes.webp",
+              alt: "Forward and backward velocity passes",
+              width: 1982,
+              height: 770,
+              caption: "Forward and backward passes combine into the final speed trace",
+            },
+            {
+              src: "/projects/lap-sim/energy.webp",
+              alt: "Braking energy at each step of the lap",
+              width: 1976,
+              height: 774,
+              caption: "Energy into the brakes at each step of the lap",
+            },
+          ]}
+        />
+      </Chapter>
+
+      {/* 03 WIND TUNNEL (light) */}
       <Chapter
         eyebrow="Aerodynamics Research"
         title="A wind tunnel, built from scratch."
@@ -127,7 +207,7 @@ export default function Home() {
         />
       </Chapter>
 
-      {/* 02 PENSAFE (dark) */}
+      {/* 04 PENSAFE (dark) */}
       <Chapter
         dark
         eyebrow="Product Design"
@@ -165,7 +245,7 @@ export default function Home() {
         />
       </Chapter>
 
-      {/* 03 FPV DRONE (light) */}
+      {/* 05 FPV DRONE (light) */}
       <Chapter
         eyebrow="Composites and Flight"
         title="A drone on a carbon fiber chassis."
@@ -196,7 +276,7 @@ export default function Home() {
         />
       </Chapter>
 
-      {/* 04 RC AIRCRAFT (dark) */}
+      {/* 06 RC AIRCRAFT (dark) */}
       <Chapter
         dark
         eyebrow="Avionics and Systems"
@@ -215,7 +295,7 @@ export default function Home() {
         />
       </Chapter>
 
-      {/* 05 CNC / AMD (light) */}
+      {/* 07 CNC / AMD (light) */}
       <Chapter
         eyebrow="CNC Machining"
         title="Machined in aluminum."
@@ -246,7 +326,7 @@ export default function Home() {
         />
       </Chapter>
 
-      {/* 06 RAPTOR (dark) */}
+      {/* 08 RAPTOR (dark) */}
       <Chapter
         dark
         eyebrow="Propulsion"
@@ -290,7 +370,7 @@ export default function Home() {
         )}
       </Chapter>
 
-      {/* 07 SUGAR FUEL (light) */}
+      {/* 09 SUGAR FUEL (light) */}
       <Chapter
         eyebrow="Chemistry"
         title="Sugar fuel."
