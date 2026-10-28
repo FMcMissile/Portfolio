@@ -99,25 +99,38 @@ export default function Home() {
         intro="A front upright for Bronco Racing's second-generation FSAE Electric car, designed in SolidWorks around four priorities: safety, ease of manufacturing, easy adjustment, and low unsprung mass. It is machined from 6061-T6 aluminum in geometry that can be cut in one or two setups on a 3-axis mill, with a bolt-on upper mount so steering geometry can be tuned without remaking the whole part. The hub runs on an opposed pair of tapered roller bearings with a K7 housing fit. FEA under pure cornering and combined braking and cornering shaped the final design and showed that, for the same 20 mm of space, widening the bearing pair cut peak bearing load four times more than moving it inboard."
         hero={{
           src: "/projects/upright/hero.webp",
-          alt: "Front upright with brake rotor and wheel assembly",
-          aspect: "aspect-[4/3]",
+          alt: "Front corner assembly with wheel, pushrod, and damper",
+          aspect: "aspect-[7/6]",
         }}
         tags={["SolidWorks", "FEA", "Bearing Design", "Design for Manufacturing"]}
       >
         <Gallery
           items={[
             {
-              src: "/projects/upright/render.webp",
-              alt: "Front upright render",
-              fit: "contain",
-              caption: "Front upright, machined from 6061-T6 aluminum",
-            },
-            {
-              src: "/projects/upright/rear.webp",
-              alt: "Rear upright render",
+              src: "/projects/upright/iso-front.webp",
+              alt: "Front upright, outboard side",
               fit: "contain",
               portrait: true,
-              caption: "Rear upright, same design approach",
+              caption: "Outboard side, machined from 6061-T6 aluminum",
+            },
+            {
+              src: "/projects/upright/iso-rear.webp",
+              alt: "Front upright, inboard side",
+              fit: "contain",
+              portrait: true,
+              caption: "Inboard side, with the bolt-on upper mount and gusseted link tabs",
+            },
+            {
+              src: "/projects/upright/corner.webp",
+              alt: "Corner assembly with rotor, caliper, and control arms",
+              fit: "contain",
+              caption: "Corner assembly with rotor, caliper, and control arms",
+            },
+            {
+              src: "/projects/upright/wheel.webp",
+              alt: "Corner assembly packaged inside the wheel",
+              fit: "contain",
+              caption: "Packaged inside a 10 inch wheel",
             },
             {
               src: "/projects/upright/fea.webp",
