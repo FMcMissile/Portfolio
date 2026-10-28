@@ -166,7 +166,7 @@ export default function Home() {
               alt: "Asymmetric friction ellipse",
               width: 1036,
               height: 675,
-              caption: "Asymmetric friction ellipse: more grip under braking than under power",
+              caption: "Asymmetric friction ellipse: more grip under braking than under acceleration",
             },
             {
               src: "/projects/lap-sim/passes.webp",
