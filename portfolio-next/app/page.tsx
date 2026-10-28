@@ -6,6 +6,7 @@ import Reveal from "./components/Reveal";
 import Gallery from "./components/Gallery";
 import Chapter from "./components/Chapter";
 import FigureStack from "./components/FigureStack";
+import FigureRow from "./components/FigureRow";
 import SplatViewer from "./components/SplatViewer";
 import ModelViewer from "./components/ModelViewer";
 
@@ -101,46 +102,50 @@ export default function Home() {
           src: "/projects/upright/hero.webp",
           alt: "Rear corner assembly with wheel, pushrod, and damper",
           aspect: "aspect-[7/6]",
+          maxW: "max-w-[780px]",
         }}
         tags={["SolidWorks", "FEA", "Bearing Design", "Design for Manufacturing"]}
       >
-        <Gallery
-          items={[
-            {
-              src: "/projects/upright/front-iso.webp",
-              alt: "Front upright",
-              fit: "contain",
-              portrait: true,
-              caption: "Front upright, machined from 6061-T6 aluminum",
-            },
-            {
-              src: "/projects/upright/front-wheel.webp",
-              alt: "Front corner packaged inside the wheel",
-              fit: "contain",
-              caption: "Front corner, packaged inside a 10 inch wheel",
-            },
-            {
-              src: "/projects/upright/rear-iso.webp",
-              alt: "Rear upright",
-              fit: "contain",
-              portrait: true,
-              caption: "Rear upright, with a slotted upper mount",
-            },
-            {
-              src: "/projects/upright/rear-corner.webp",
-              alt: "Rear corner assembly with rotor, caliper, and control arms",
-              fit: "contain",
-              caption: "Rear corner assembly with rotor, caliper, and control arms",
-            },
-            {
-              src: "/projects/upright/fea.webp",
-              alt: "Stress plot of the front upright",
-              fit: "contain",
-              portrait: true,
-              caption: "Front upright under combined braking and cornering",
-            },
-          ]}
-        />
+        <>
+          <FigureRow
+            figures={[
+              {
+                src: "/projects/upright/front-iso.webp",
+                alt: "Front upright",
+                width: 788,
+                height: 1093,
+                caption: "Front upright",
+              },
+              {
+                src: "/projects/upright/rear-iso.webp",
+                alt: "Rear upright",
+                width: 709,
+                height: 1143,
+                caption: "Rear upright, with a slotted upper mount",
+              },
+            ]}
+          />
+          <div className="mt-16 max-[734px]:mt-12">
+            <FigureRow
+              figures={[
+                {
+                  src: "/projects/upright/front-wheel.webp",
+                  alt: "Front corner packaged inside the wheel",
+                  width: 1250,
+                  height: 1176,
+                  caption: "Front corner, packaged inside a 10 inch wheel",
+                },
+                {
+                  src: "/projects/upright/rear-corner.webp",
+                  alt: "Rear corner assembly with rotor, caliper, and control arms",
+                  width: 761,
+                  height: 856,
+                  caption: "Rear corner assembly with rotor, caliper, and control arms",
+                },
+              ]}
+            />
+          </div>
+        </>
       </Chapter>
 
       {/* 02 LAP SIMULATION (dark) */}

@@ -17,6 +17,8 @@ export interface Hero {
   alt: string;
   /** Tailwind aspect class for the frame; defaults to 16/9 */
   aspect?: string;
+  /** Tailwind max-width class for the frame; defaults to 1100px */
+  maxW?: string;
 }
 
 interface ChapterProps {
@@ -57,7 +59,7 @@ export default function Chapter({
     <section className={`${dark ? "bg-night" : "bg-paper"} py-28 max-[734px]:py-20`}>
       {hero && (
         <Reveal className="mb-16 max-[734px]:mb-10">
-          <div className="mx-auto max-w-[1100px] px-6">
+          <div className={`mx-auto ${hero.maxW ?? "max-w-[1100px]"} px-6`}>
             <div
               className={`relative ${hero.aspect ?? "aspect-[16/9]"} w-full overflow-hidden rounded-[1.75rem] ${
                 dark ? "bg-night2" : "bg-paper2"
