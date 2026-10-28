@@ -5,7 +5,6 @@ import Nav from "./components/Nav";
 import Reveal from "./components/Reveal";
 import Gallery from "./components/Gallery";
 import Chapter from "./components/Chapter";
-import FigureStack from "./components/FigureStack";
 import SplatViewer from "./components/SplatViewer";
 import ModelViewer from "./components/ModelViewer";
 
@@ -158,28 +157,28 @@ export default function Home() {
         }}
         tags={["MATLAB", "Vehicle Dynamics", "Simulation"]}
       >
-        <FigureStack
+        <Gallery
           dark
-          figures={[
+          items={[
             {
               src: "/projects/lap-sim/ellipse.webp",
               alt: "Asymmetric friction ellipse",
-              width: 1036,
-              height: 675,
+              fit: "contain",
+              wide: true,
               caption: "Asymmetric friction ellipse: more grip under braking than under acceleration",
             },
             {
               src: "/projects/lap-sim/passes.webp",
               alt: "Forward and backward velocity passes",
-              width: 1982,
-              height: 770,
+              fit: "contain",
+              wide: true,
               caption: "Forward and backward passes combine into the final speed trace",
             },
             {
               src: "/projects/lap-sim/energy.webp",
               alt: "Braking energy at each step of the lap",
-              width: 1976,
-              height: 774,
+              fit: "contain",
+              wide: true,
               caption: "Energy into the brakes at each step of the lap",
             },
           ]}
