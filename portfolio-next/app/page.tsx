@@ -92,14 +92,14 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* 01 FRONT UPRIGHT (light) */}
+      {/* 01 UPRIGHTS (light) */}
       <Chapter
         eyebrow="Bronco Racing FSAE Electric, 2026"
-        title="Front Upright"
-        intro="A front upright for Bronco Racing's second-generation FSAE Electric car, designed in SolidWorks around four priorities: safety, ease of manufacturing, easy adjustment, and low unsprung mass. It is machined from 6061-T6 aluminum in geometry that can be cut in one or two setups on a 3-axis mill, with a bolt-on upper mount so steering geometry can be tuned without remaking the whole part. The hub runs on an opposed pair of tapered roller bearings with a K7 housing fit. FEA under pure cornering and combined braking and cornering shaped the final design and showed that, for the same 20 mm of space, widening the bearing pair cut peak bearing load four times more than moving it inboard."
+        title="Uprights"
+        intro="Front and rear uprights for Bronco Racing's second-generation FSAE Electric car, designed in SolidWorks around four priorities: safety, ease of manufacturing, easy adjustment, and low unsprung mass. Both are machined from 6061-T6 aluminum in geometry that can be cut in one or two setups on a 3-axis mill, with a bolt-on upper mount so suspension geometry can be tuned without remaking the whole part. On the front, the hub runs on an opposed pair of tapered roller bearings with a K7 housing fit, and FEA under pure cornering and combined braking and cornering showed that, for the same 20 mm of space, widening the bearing pair cut peak bearing load four times more than moving it inboard."
         hero={{
           src: "/projects/upright/hero.webp",
-          alt: "Front corner assembly with wheel, pushrod, and damper",
+          alt: "Rear corner assembly with wheel, pushrod, and damper",
           aspect: "aspect-[7/6]",
         }}
         tags={["SolidWorks", "FEA", "Bearing Design", "Design for Manufacturing"]}
@@ -107,37 +107,37 @@ export default function Home() {
         <Gallery
           items={[
             {
-              src: "/projects/upright/iso-front.webp",
-              alt: "Front upright, outboard side",
+              src: "/projects/upright/front-iso.webp",
+              alt: "Front upright",
               fit: "contain",
               portrait: true,
-              caption: "Outboard side, machined from 6061-T6 aluminum",
+              caption: "Front upright, machined from 6061-T6 aluminum",
             },
             {
-              src: "/projects/upright/iso-rear.webp",
-              alt: "Front upright, inboard side",
+              src: "/projects/upright/front-wheel.webp",
+              alt: "Front corner packaged inside the wheel",
+              fit: "contain",
+              caption: "Front corner, packaged inside a 10 inch wheel",
+            },
+            {
+              src: "/projects/upright/rear-iso.webp",
+              alt: "Rear upright",
               fit: "contain",
               portrait: true,
-              caption: "Inboard side, with the bolt-on upper mount and gusseted link tabs",
+              caption: "Rear upright, with a slotted upper mount",
             },
             {
-              src: "/projects/upright/corner.webp",
-              alt: "Corner assembly with rotor, caliper, and control arms",
+              src: "/projects/upright/rear-corner.webp",
+              alt: "Rear corner assembly with rotor, caliper, and control arms",
               fit: "contain",
-              caption: "Corner assembly with rotor, caliper, and control arms",
-            },
-            {
-              src: "/projects/upright/wheel.webp",
-              alt: "Corner assembly packaged inside the wheel",
-              fit: "contain",
-              caption: "Packaged inside a 10 inch wheel",
+              caption: "Rear corner assembly with rotor, caliper, and control arms",
             },
             {
               src: "/projects/upright/fea.webp",
               alt: "Stress plot of the front upright",
               fit: "contain",
               portrait: true,
-              caption: "Stress under combined braking and cornering",
+              caption: "Front upright under combined braking and cornering",
             },
           ]}
         />
