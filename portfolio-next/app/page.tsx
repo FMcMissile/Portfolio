@@ -96,7 +96,7 @@ export default function Home() {
       <Chapter
         eyebrow="Bronco Racing FSAE Electric, 2026"
         title="Uprights"
-        intro="Front and rear uprights for Bronco Racing's second-generation FSAE Electric car, designed in SolidWorks around four priorities: safety, ease of manufacturing, easy adjustment, and low unsprung mass. Both are machined from 6061-T6 aluminum in geometry that can be cut in one or two setups on a 3-axis mill, with a bolt-on upper mount so suspension geometry can be tuned without remaking the whole part. On the front, the hub runs on an opposed pair of tapered roller bearings with a K7 housing fit, and FEA under pure cornering and combined braking and cornering showed that, for the same 20 mm of space, widening the bearing pair cut peak bearing load four times more than moving it inboard."
+        intro="Front and rear uprights for Bronco Racing's second-generation FSAE Electric car, designed in SolidWorks around four priorities: safety, ease of manufacturing, easy adjustment, and low unsprung mass. Both are machined from 6061-T6 aluminum and made to be cut in two or three setups on a 3-axis mill, with bolt-on upper mounts so suspension geometry can be tuned without remaking the whole part. Front and rear hubs run a pair of deep groove ball bearings with a K7 housing fit, with max loads verified with FEA against pure cornering and combined braking and cornering cases for front and rear wheels specifically. FEA showed that, for the same 20 mm of space, widening the bearing pair cut peak bearing load four times more than moving it inboard."
         hero={{
           src: "/projects/upright/hero.webp",
           alt: "Rear corner assembly with wheel, pushrod, and damper",
@@ -148,7 +148,7 @@ export default function Home() {
         dark
         eyebrow="Brake energy model, MATLAB"
         title="Lap Simulation"
-        intro="A point-mass lap simulation I wrote from scratch in MATLAB to find out how much energy the brakes absorb over an endurance lap. It rebuilds the track from corner radii, then runs a forward pass for acceleration and a backward pass for braking, using an asymmetric friction ellipse to blend cornering with braking or accelerating. Halving the step size changed lap time by under half a second, so the result is stable. Summing the speed lost under braking gives about 1.6 MJ per lap, roughly 13 hard stops from 67 to 22 mph, which became the heat load for my brake rotor thermal study."
+        intro="A point-mass lap simulation I wrote from scratch in MATLAB to find out how much energy the brakes absorb over an endurance lap and to eventually inform aerodynamics design as drag and downforce produce opposing outcomes for lap times. It rebuilds the track from corner radii, then runs a forward pass for acceleration and a backward pass for braking, using an asymmetric friction ellipse based on TTC tire data to blend cornering with braking or accelerating for our tire size and compound. Halving the step size changed lap time by under half a second, so the result is stable. Adding up the total speed lost under braking gives about 1.6 MJ per lap, which is equivalent to roughly 13 hard stops from 67 to 22 mph. This then became the heat load for my brake rotor thermal study."
         hero={{
           src: "/projects/lap-sim/hero.webp",
           alt: "Reconstructed track path beside the lap speed trace",
