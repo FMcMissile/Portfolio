@@ -6,7 +6,6 @@ import Reveal from "./components/Reveal";
 import Gallery from "./components/Gallery";
 import Chapter from "./components/Chapter";
 import FigureStack from "./components/FigureStack";
-import FigureRow from "./components/FigureRow";
 import SplatViewer from "./components/SplatViewer";
 import ModelViewer from "./components/ModelViewer";
 
@@ -98,54 +97,52 @@ export default function Home() {
         eyebrow="Bronco Racing FSAE Electric, 2026"
         title="Uprights"
         intro="Front and rear uprights for Bronco Racing's second-generation FSAE Electric car, designed in SolidWorks around four priorities: safety, ease of manufacturing, easy adjustment, and low unsprung mass. Both are machined from 6061-T6 aluminum and made to be cut in two or three setups on a 3-axis mill, with bolt-on upper mounts so suspension geometry can be tuned without remaking the whole part. Front and rear hubs run a pair of deep groove ball bearings with a K7 housing fit, with max loads verified with FEA against pure cornering and combined braking and cornering cases for front and rear wheels specifically. FEA showed that, for the same 20 mm of space, widening the bearing pair cut peak bearing load four times more than moving it inboard."
-        hero={{
-          src: "/projects/upright/hero.webp",
-          alt: "Rear corner assembly with wheel, pushrod, and damper",
-          aspect: "aspect-[7/6]",
-          maxW: "max-w-[780px]",
-        }}
+        heroRow={[
+          {
+            src: "/projects/upright/front-iso.webp",
+            alt: "Front upright",
+            width: 788,
+            height: 1093,
+            caption: "Front upright",
+          },
+          {
+            src: "/projects/upright/rear-iso.webp",
+            alt: "Rear upright",
+            width: 709,
+            height: 1143,
+            caption: "Rear upright, with a slotted upper mount",
+          },
+        ]}
         tags={["SolidWorks", "FEA", "Bearing Design", "Design for Manufacturing"]}
       >
-        <>
-          <FigureRow
-            figures={[
-              {
-                src: "/projects/upright/front-iso.webp",
-                alt: "Front upright",
-                width: 788,
-                height: 1093,
-                caption: "Front upright",
-              },
-              {
-                src: "/projects/upright/rear-iso.webp",
-                alt: "Rear upright",
-                width: 709,
-                height: 1143,
-                caption: "Rear upright, with a slotted upper mount",
-              },
-            ]}
-          />
-          <div className="mt-16 max-[734px]:mt-12">
-            <FigureRow
-              figures={[
-                {
-                  src: "/projects/upright/front-wheel.webp",
-                  alt: "Front corner packaged inside the wheel",
-                  width: 1250,
-                  height: 1176,
-                  caption: "Front corner, packaged inside a 10 inch wheel",
-                },
-                {
-                  src: "/projects/upright/rear-corner.webp",
-                  alt: "Rear corner assembly with rotor, caliper, and control arms",
-                  width: 761,
-                  height: 856,
-                  caption: "Rear corner assembly with rotor, caliper, and control arms",
-                },
-              ]}
-            />
-          </div>
-        </>
+        <Gallery
+          items={[
+            {
+              src: "/projects/upright/front-wheel.webp",
+              alt: "Front corner packaged inside the wheel",
+              fit: "contain",
+              caption: "Front corner, packaged inside a 10 inch wheel",
+            },
+            {
+              src: "/projects/upright/rear-wheel.webp",
+              alt: "Rear corner assembly with wheel, pushrod, and damper",
+              fit: "contain",
+              caption: "Rear corner, with the pushrod and damper",
+            },
+            {
+              src: "/projects/upright/rear-corner.webp",
+              alt: "Rear corner assembly with rotor, caliper, and control arms",
+              fit: "contain",
+              caption: "Rear corner assembly with rotor, caliper, and control arms",
+            },
+            {
+              src: "/projects/upright/rear-corner-2.webp",
+              alt: "Rear corner, closer on the hub and caliper",
+              fit: "contain",
+              caption: "Rear corner, closer on the hub and caliper",
+            },
+          ]}
+        />
       </Chapter>
 
       {/* 02 LAP SIMULATION (dark) */}

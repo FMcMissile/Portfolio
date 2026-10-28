@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
+import FigureRow from "./FigureRow";
+import type { Figure } from "./FigureStack";
 
 export interface Stat {
   value: string;
@@ -28,6 +30,8 @@ interface ChapterProps {
   dark?: boolean;
   /** Large lead image shown above the heading */
   hero?: Hero;
+  /** Pair of captioned figures shown above the heading, in place of `hero` */
+  heroRow?: Figure[];
   stats?: Stat[];
   highlights?: Highlight[];
   /** Tools and methods, shown as pills at the end of the chapter */
@@ -44,6 +48,7 @@ export default function Chapter({
   intro,
   dark = false,
   hero,
+  heroRow,
   stats,
   highlights,
   tags,
@@ -57,6 +62,12 @@ export default function Chapter({
 
   return (
     <section className={`${dark ? "bg-night" : "bg-paper"} py-28 max-[734px]:py-20`}>
+      {heroRow && heroRow.length > 0 && (
+        <Reveal className="mb-16 max-[734px]:mb-10">
+          <FigureRow figures={heroRow} dark={dark} tall />
+        </Reveal>
+      )}
+
       {hero && (
         <Reveal className="mb-16 max-[734px]:mb-10">
           <div className={`mx-auto ${hero.maxW ?? "max-w-[1100px]"} px-6`}>
