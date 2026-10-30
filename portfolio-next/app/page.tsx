@@ -129,16 +129,16 @@ export default function Home() {
               caption: "Rear corner, with the pushrod and damper",
             },
             {
+              src: "/projects/upright/front-corner.webp",
+              alt: "Front corner assembly with rotor, caliper, and control arms",
+              fit: "contain",
+              caption: "Front corner assembly",
+            },
+            {
               src: "/projects/upright/rear-corner.webp",
               alt: "Rear corner assembly with rotor, caliper, and control arms",
               fit: "contain",
-              caption: "Rear corner assembly with rotor, caliper, and control arms",
-            },
-            {
-              src: "/projects/upright/rear-corner-2.webp",
-              alt: "Rear corner, closer on the hub and caliper",
-              fit: "contain",
-              caption: "Rear corner, closer on the hub and caliper",
+              caption: "Rear corner assembly",
             },
           ]}
         />
