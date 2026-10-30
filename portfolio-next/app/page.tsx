@@ -109,7 +109,7 @@ export default function Home() {
             alt: "Rear upright",
             width: 709,
             height: 1143,
-            caption: "Rear upright, with a slotted upper mount",
+            caption: "Rear upright",
           },
         ]}
         tags={["SolidWorks", "FEA", "Bearing Design", "Design for Manufacturing"]}
